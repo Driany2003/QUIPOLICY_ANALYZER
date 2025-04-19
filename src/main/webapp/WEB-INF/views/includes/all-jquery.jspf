@@ -1,0 +1,20 @@
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/static/web/assets/libs/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/static/web/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="/static/web/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- apps -->
+<script src="/static/web/dist/js/app.min.js"></script>
+<script src="/static/web/dist/js/app.init.js"></script>
+<script src="/static/web/dist/js/app-style-switcher.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/static/web/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="/static/web/assets/extra-libs/sparkline/sparkline.js"></script>
+<!--Wave Effects -->
+<script src="/static/web/dist/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/static/web/dist/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/web/dist/js/custom.min.js"></script>

@@ -1,0 +1,28 @@
+
+#Informacion del proyecto
+info:
+  project:
+    title: Quipolicy_analyzer - SISTEMA AUTOMATIZADO DE COMPARACION DE POLIZAS
+    name: Quipolicy_analyzer
+    description: Quipolicy_analyzer - SISTEMA AUTOMATIZADO DE COMPARACION DE POLIZAS
+    version: 0.1.0-SNAPSHOT
+
+#Configuracion del Servidor
+server:
+  port: 8080
+  servlet:
+    context-path:
+
+#Configuraciones para Spring - Base de Datos
+spring:
+  profiles:
+    active: dev
+  application:
+    name: Quipolicy_analyzer
+  devtools:
+    add-properties: true
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    static-path-pattern: /static/**

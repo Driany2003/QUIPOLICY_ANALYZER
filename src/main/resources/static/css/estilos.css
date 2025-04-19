@@ -1,0 +1,52 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    height: 100px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.cabecera {
+    background-color: #EBEBEB;
+    padding: 4px;
+    text-align: left;
+    font-size: 18px;
+    #font-weight: bold;
+}
+
+.paginaActiva {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.login {
+    background-color: #ffffff;
+    padding-top: 2px;
+    text-align: right;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.formularioFiltros {
+    background-color: #EBEBEB;
+    padding: 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nombreTabla {
+    background-color: #EBEBEB;
+    padding: 1px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+tbody, td, tfoot, th, thead, tr {
+    font-size: small;
+}

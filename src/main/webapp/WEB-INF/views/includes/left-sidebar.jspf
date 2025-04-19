@@ -1,0 +1,302 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!-- //url nivel 1 -->
+<c:url var="adminUrl" value="/holistic/menu/administracion"/>
+<c:url var="configUrl" value="/holistic/menu/configuracion"/>
+<!-- //url nivel 2 -->
+
+<!-- //configUrl -->
+<c:set var="dashboardUrl" value="${configUrl}/dashboard"/>
+<c:set var="edificioUrl" value="${configUrl}/edificio"/>
+<c:set var="categoriaUrl" value="${configUrl}/categoria"/>
+<c:set var="productoUrl" value="${configUrl}/producto"/>
+<c:set var="usuarioUrl" value="${configUrl}/usuario"/>
+<c:set var="clienteUrl" value="${configUrl}/cliente"/>
+
+<!-- //adminUrl -->
+<c:set var="planillaUrl" value="${adminUrl}/planilla"/>
+<c:set var="facturacionUrl" value="${adminUrl}/factura"/>
+
+<!-- //url nivel 3 -->
+
+<!--
+roles
+-administrador
+-service desk
+-trabajador
+-propietario/jdp(junta de propietario)
+-->
+
+<aside class="left-sidebar">
+    <div class="scroll-sidebar">
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <c:if test="${sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
+                    <li class="nav-small-cap">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                        <span class="hide-menu">Configuracion</span>
+                    </li>
+
+                    <!-- Usuario -->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${dashboardUrl}">
+                            <i class="mdi mdi-account-circle"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <!-- Edificios -->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link toggle-collapse" data-target="#edificio">
+                            <i class="mdi mdi-home-modern"></i>
+                            <span class="menu-title">Edificio</span>
+                            <i class="mdi mdi-chevron-right toggle-icon"></i>
+                        </a>
+                        <div class="collapse" id="edificio">
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/departamento">Departamento</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/medicion">Mediciones</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/zonas-comunes">Zonas Comunes</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/reserva">Reservas</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/inventario">Inventario</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/propietario">Propietario</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/facturacion">Facturación</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/recaudacion">Recaudación</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/junta-propietarios">Junta de Propietarios</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${edificioUrl}/asignar-empleados">Asignar Empleados</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Usuario -->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link toggle-collapse" data-target="#usuarios">
+                            <i class="mdi mdi-account-multiple"></i>
+                            <span class="menu-title">Usuarios</span>
+                            <i class="mdi mdi-chevron-right toggle-icon"></i>
+                        </a>
+                        <div class="collapse" id="usuarios">
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a class="nav-link" href="${usuarioUrl}/asistencia">Asistencia</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${usuarioUrl}/datos-personales">Datos Personales</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Cliente -->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${clienteUrl}">
+                            <i class="mdi mdi-account-group"></i>
+                            <span class="hide-menu">Cliente</span>
+                        </a>
+                    </li>
+
+                    <!-- Productos -->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link toggle-collapse" data-target="#producto">
+                            <i class="mdi mdi-cube"></i>
+                            <span class="menu-title">Producto</span>
+                            <i class="mdi mdi-chevron-right toggle-icon"></i>
+                        </a>
+                        <div class="collapse" id="producto">
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a class="nav-link" href="${productoUrl}/listar-producto">Listar Productos</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a class="nav-link" href="${productoUrl}/inventario">Inventario</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link toggle-collapse" data-target="#categoria">
+                            <i class="mdi mdi-label"></i>
+                            <span class="menu-title">Categoria</span>
+                            <i class="mdi mdi-chevron-right toggle-icon"></i>
+                        </a>
+                        <div class="collapse" id="categoria">
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a class="nav-link" href="${categoriaUrl}/solicitud">Solicitud</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-small-cap">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                        <span class="hide-menu">Administración</span>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${planillaUrl}">
+                            <i class="mdi mdi-file-document"></i>
+                            <span class="hide-menu">Planilla</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link toggle-collapse" data-target="#facturacion">
+                            <i class="mdi mdi-cube"></i>
+                            <span class="menu-title">Facturación</span>
+                            <i class="mdi mdi-chevron-right toggle-icon"></i>
+                        </a>
+                        <div class="collapse" id="facturacion">
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a class="nav-link" href="${facturacionUrl}/cobro">Cobro</a></li>
+                                <li class="sub-item"><a class="nav-link" href="${facturacionUrl}/pago">Pago</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </c:if>
+
+                <!-- Menú para Trabajador -->
+                <c:if test="${sessionScope.usuSessionNivel == 'TRABAJADOR'}">
+                    <li class="nav-small-cap">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                        <span class="hide-menu">Gestión</span>
+                    </li>
+
+                    <li class="sidebar-item"><a class="sidebar-link" href="${usuarioUrl}/asistencia"><i class="mdi mdi-calendar-check"></i> Asistencia</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${empleadoUrl}/datos-personales"><i class="mdi mdi-account-circle"></i> Mis Datos</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${categoriaUrl}/solicitud"><i class="mdi mdi-ticket"></i> solicitud</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${edificioUrl}/reserva"><i class="mdi mdi-calendar"></i> Reservas</a></li>
+                </c:if>
+
+                <!-- Menú para Propietario -->
+                <c:if test="${sessionScope.usuSessionNivel == 'PROPIETARIO'}">
+                    <li class="nav-small-cap">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                        <span class="hide-menu">Mis Opciones</span>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${empleadoUrl}/datos-personales"><i class="mdi mdi-account-circle"></i> Mis Datos</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${categoriaUrl}/solicitud"><i class="mdi mdi-solicitud"></i> solicitud</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${edificioUrl}/reserva"><i class="mdi mdi-calendar"></i> Reservas</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${facturacionUrl}/pagos"><i class="mdi mdi-cash"></i> Mis Pagos</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${edificioUrl}/zonas-comunes"><i class="mdi mdi-domain"></i> Áreas Comunes</a></li>
+                </c:if>
+
+                <c:if test="${sessionScope.usuSessionNivel == 'SERVICE_DESK'}">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${dashboardUrl}">
+                            <i class="mdi mdi-file-document"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-small-cap">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                        <span class="hide-menu">Gestión de Tickets</span>
+                    </li>
+
+                    <li class="sidebar-item"><a class="sidebar-link" href="${categoriaUrl}/solicitud"><i class="mdi mdi-plus-box"></i> Registrar solicitud</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="${categoriaUrl}/solicitud"><i class="mdi mdi-plus-box"></i> Registrar solicitud</a></li>
+                </c:if>
+
+
+                <!-- Sesión -->
+                <li class="nav-small-cap">
+                    <i class="mdi mdi-dots-horizontal"></i>
+                    <span class="hide-menu">Sesión</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/logout">
+                        <i class="mdi mdi-logout-variant"></i>
+                        <span class="hide-menu">Salir</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<style>
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        font-size: 14px;
+        transition: background-color 0.9s ease, color 0.3s ease;
+        border-left: 3px solid transparent;
+    }
+
+    .sidebar-link:hover {
+        background-color: #f4f4f4;
+        color: #007bff;
+    }
+
+    .toggle-icon {
+        font-size: 14px;
+        transition: transform 0.3s ease;
+        margin-left: auto; /* Alinea el ícono a la derecha */
+    }
+
+    .sidebar-item.open .toggle-icon {
+        transform: rotate(90deg);
+    }
+
+    .collapse {
+        display: none;
+        padding-left: 15px;
+    }
+
+    .collapse.show {
+        display: block;
+    }
+
+    .sub-menu {
+        background-color: #f9f9f9;
+        padding: 5px;
+        border-radius: 5px;
+        border-left: 2px solid #007bff; /* Guía decorativa */
+    }
+
+    .sub-item {
+        position: relative;
+        margin: 5px 0;
+    }
+
+    /* Viñetas decorativas */
+    .sub-item::before {
+        content: '•';
+        color: #007bff;
+        font-size: 18px;
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .sub-item a {
+        padding: 8px 15px;
+        font-size: 13px;
+        color: #555;
+        text-decoration: none;
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    .sub-item a:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+</style>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggles = document.querySelectorAll('.toggle-collapse');
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", function (event) {
+                const parent = toggle.parentElement;
+                const target = document.querySelector(toggle.getAttribute("data-target"));
+
+                // Alternar estado de colapso
+                target.classList.toggle("show");
+                parent.classList.toggle("open");
+
+                event.preventDefault();
+            });
+        });
+    });
+</script>

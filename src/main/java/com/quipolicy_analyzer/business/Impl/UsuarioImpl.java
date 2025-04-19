@@ -1,3 +1,9 @@
 package com.quipolicy_analyzer.business.Impl;
 
-public class UsuarioImpl {}
+import com.quipolicy_analyzer.business.IUsuarioService;
+
+public class UsuarioImpl implements IUsuarioService {
+
+
+
+}

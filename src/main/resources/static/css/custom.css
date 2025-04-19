@@ -1,0 +1,206 @@
+.info-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    color: gray;
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+.card {
+    border: none;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.registrado-superior-card .card-body {
+    background-color: #add8e6;
+}
+
+.pagado-superior-card .card-body {
+    background-color: #ffb6c1;
+}
+
+.en-proceso-superior-card .card-body {
+    background-color: #ffa07a;
+}
+
+.atendido-card-superior .card-body {
+    background-color: #90ee90;
+
+}
+
+.atendido-card {
+    border: 2px solid #90ee90;
+}
+
+.en-proceso-card {
+    border: 2px solid #ffa07a;
+}
+
+.card-pagado {
+    border: 2px solid #ffb6c1;
+}
+
+.card-registrado {
+    border: 2px solid #add8e6;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.productos-section {
+    padding: 0;
+    list-style: none;
+}
+
+.producto-item {
+    margin-bottom: 10px;
+}
+
+.total-section {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.total-section p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.task-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #673ab7;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #673ab7;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.table {
+    background-color: white;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+#productImage {
+    margin-top: 10px;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+/* Estilo para los campos de entrada del modal */
+.coolinput {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    position: static;
+    max-width: 240px;
+}
+
+.coolinput label.text {
+    font-size: 0.75rem;
+    color: #000000;
+    font-weight: 700;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0 0 7px;
+    padding: 0 3px;
+    background: #e8e8e8;
+    width: fit-content;
+}
+
+.coolinput input[type="text"].input {
+    padding: 11px 10px;
+    font-size: 0.75rem;
+    border: 2px #000000 solid;
+    border-radius: 5px;
+    background: #e8e8e8;
+}
+
+.coolinput input[type="text"].input:focus {
+    outline: none;
+}
