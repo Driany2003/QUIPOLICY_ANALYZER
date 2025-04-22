@@ -1,4 +1,4 @@
 <%
-    String redirectURL = "/quipolicy/login";
+    String redirectURL = "/quipolicy/consolidar-firmas";
     response.sendRedirect(redirectURL);
 %>

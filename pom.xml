@@ -61,7 +61,8 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
+
 
 	<build>
 		<plugins>
