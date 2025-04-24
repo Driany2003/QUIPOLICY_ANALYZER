@@ -99,6 +99,7 @@
 </footer>
 
 <!-- PDF.js core + worker -->
+<!-- PDF.js core + worker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -195,6 +196,7 @@
         }
     });
 </script>
+
 
 <!-- customs -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
