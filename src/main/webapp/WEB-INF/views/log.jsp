@@ -1,16 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html dir="ltr" lang="en">
-<%@ include file="includes/header.jspf" %>
-<body>
-<!-- ============================================================== -->
-<!-- Preloader - style you can find in spinners.css -->
-<!-- ============================================================== -->
-<%@ include file="includes/preloader.jspf" %>
-<!-- ============================================================== -->
-<!-- Main wrapper - style you can find in pages.scss -->
-<!-- ============================================================== -->
-<%@ page contentType="text/html; charset=UTF-8" %>
-<html dir="ltr" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+</head>
 <%@ include file="includes/header.jspf" %>
 <body>
 <%@ include file="includes/preloader.jspf" %>
