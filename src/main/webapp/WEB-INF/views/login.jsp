@@ -17,7 +17,7 @@
     <div class="auth-wrapper d-flex no-block justify-content-center align-items-center">
         <div class="auth-box">
             <div class="logo">
-                <span class="db"><img src="/static/web/assets/images/0_logo/positiva_logo.png" height="80%" width="80%" alt="Kenpis"/></span>
+                <span class="db"><img src="/static/web/assets/images/lapositivaseguros.png" height="50%" width="50%" alt="Quipolicy Analyzer"/></span>
                 <br><br><br>
                <h1 class="font-medium m-b-10">Quipolicy Analyzer</h1>
                 <h3 class="font-10 m-b-5">SISTEMA AUTOMATIZADO DE COMPARACION DE POLIZAS</h3>

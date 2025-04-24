@@ -10,17 +10,12 @@
             <!-- Logo -->
             <!-- ============================================================== -->
             <div class="navbar-brand">
-                <a href="/kenpis/dashboard" class="logo">
+                <a href="#" class="logo">
                     <!-- Logo icon -->
                     <b class="logo-icon">
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <img src="/static/web/assets/images/0_logo/holistic_icono.png" height="40%" width="40%" alt="Quipolicy Analyzer"  class="light-logo" >
+                        <img src="/static/web/assets/images/0_logo/positiva_logo.png" height="50%" width=140px"   class="light-logo" >
                     </b>
-                    <!--End Logo icon -->
-                    <!-- Logo text -->
-                    <span class="logo-text">
-                        <img src="/static/web/assets/images/0_logo/holistic_texto.png" height="40%" width="40%" alt="Quipolicy Analyzer" class="light-logo"/>
-                    </span>
                 </a>
                 <a class="sidebartoggler d-none d-md-block" href="javascript:void(0)" data-sidebartype="mini-sidebar">
                     <i class="mdi mdi-toggle-switch mdi-toggle-switch-off font-20"></i>
