@@ -26,3 +26,12 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
     static-path-pattern: /static/**
+
+
+    # CREDENCIALES PARA CONEXION A LA BASE DE DATOS
+    #  port: 1433
+    #  host: 161.132.55.86
+    #  username: SA
+    #  password: Lima1234..
+    #  nombre de bd: BD_QUIPOLICY
+    #  Name cabecera: BD_QUIPOLCY
