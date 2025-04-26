@@ -20,11 +20,62 @@
                 <div class="container py-5">
                     <div class="row">
 
+                        <!-- Cargar Documento -->
+                        <div class="col-md-4 mb-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="icon-arrow-up-circle"></i> Cargar Documento
+                                    </h5>
+                                    <p class="text-muted small">
+                                        Suba el documento que desea validar contra los documentos de referencia
+                                    </p>
+                                    <div id="dropzone"
+                                         class="border rounded p-4 text-center"
+                                         style="border:2px dashed #ced4da; min-height:200px; cursor:pointer;">
+                                        <i class="icon-cloud-upload" style="font-size:2rem; color:#6c757d;"></i>
+                                        <p class="mt-2 mb-1 font-weight-bold">Arrastre tu PDF aquí</p>
+                                        <small class="text-muted d-block mb-3">
+                                            Formatos soportados: PDF (máx. 10MB)
+                                        </small>
+                                        <button id="uploadBtn" class="btn btn-outline-secondary btn-sm">
+                                            Elegir archivo
+                                        </button>
+                                        <input type="file" id="fileInput" accept="application/pdf" hidden>
+                                        <div id="fileName" class="text-truncate mt-2 small text-secondary">
+                                            No se ha seleccionado ningún archivo
+                                        </div>
+                                        <div id="fileSize" class="text-truncate small text-secondary"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documento de Referencia -->
+                        <div class="col-md-8 mb-6">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="icon-doc"></i> Documento de Referencia
+                                    </h5>
+                                    <p class="text-muted small">
+                                        Seleccione el documento de referencia para la comparación
+                                    </p>
+                                    <select id="referenceDoc" class="form-control">
+                                        <option>Seleccionar documento</option>
+                                        <option>Contrato Marco v2.3 (v2.3)</option>
+                                        <option>Formulario de Registro (v1.5)</option>
+                                        <option>Acuerdo de Confidencialidad (v3.0)</option>
+                                        <option>Política de Privacidad (v2.1)</option>
+                                        <option>Contrato de Servicios (v1.8)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                 </div>
             </div>
         </div>
-
-
     </div>
 
 
