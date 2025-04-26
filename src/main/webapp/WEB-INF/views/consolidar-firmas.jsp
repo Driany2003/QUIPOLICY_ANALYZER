@@ -15,65 +15,120 @@
               </div>
           </div>
           -->
-        <div class="container-fluid">
+          <div class="container-fluid">
             <div class="card mt-3">
                 <div class="container py-5">
                     <div class="row">
-
-                        <!-- Cargar Documento -->
-                        <div class="col-md-4 mb-6">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <i class="icon-arrow-up-circle"></i> Cargar Documento
+                        <!-- Reportes Pendientes (izquierda) -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm" style="height: 335px;"> <!-- Altura fija -->
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title mb-2">
+                                        <i class="icon-clock"></i> Reportes Pendientes
                                     </h5>
                                     <p class="text-muted small">
-                                        Suba el documento que desea validar contra los documentos de referencia
+                                        Reportes que requieren revisión y aprobación
                                     </p>
-                                    <div id="dropzone"
-                                         class="border rounded p-4 text-center"
-                                         style="border:2px dashed #ced4da; min-height:200px; cursor:pointer;">
-                                        <i class="icon-cloud-upload" style="font-size:2rem; color:#6c757d;"></i>
-                                        <p class="mt-2 mb-1 font-weight-bold">Arrastre tu PDF aquí</p>
-                                        <small class="text-muted d-block mb-3">
-                                            Formatos soportados: PDF (máx. 10MB)
-                                        </small>
-                                        <button id="uploadBtn" class="btn btn-outline-secondary btn-sm">
-                                            Elegir archivo
-                                        </button>
-                                        <input type="file" id="fileInput" accept="application/pdf" hidden>
-                                        <div id="fileName" class="text-truncate mt-2 small text-secondary">
-                                            No se ha seleccionado ningún archivo
-                                        </div>
-                                        <div id="fileSize" class="text-truncate small text-secondary"></div>
+                                    <!-- Contenedor Scrollable -->
+                                    <div style="overflow-y: auto; flex-grow: 1; padding-right: 5px;">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <strong>Contrato de Servicios v1.8</strong><br>
+                                                    <small class="text-muted">02/04/2024</small>
+                                                </div>
+                                                <div class="text-end">
+                                                    <span class="badge bg-warning text-dark">Pendiente</span><br>
+                                                    <small class="text-danger">3 diferencias</small>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center border border-success rounded">
+                                                <div>
+                                                    <strong>Acuerdo de Confidencialidad.docx</strong><br>
+                                                    <small class="text-muted">01/04/2024</small>
+                                                </div>
+                                                <div class="text-end">
+                                                    <span class="badge bg-warning text-dark">Pendiente</span><br>
+                                                    <small class="text-success">Validado</small>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <strong>Política de Privacidad.pdf</strong><br>
+                                                    <small class="text-muted">31/03/2024</small>
+                                                </div>
+                                                <div class="text-end">
+                                                    <span class="badge bg-warning text-dark">Pendiente</span><br>
+                                                    <small class="text-danger">5 diferencias</small>
+                                                </div>
+                                            </li>
+                                            <!-- Puedes seguir agregando más reportes aquí -->
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Documento de Referencia -->
-                        <div class="col-md-8 mb-6">
-                            <div class="card h-100 shadow-sm">
+        
+                    
+                        <!-- Reporte de Validación (derecha) -->
+                        <div class="col-md-8 mb-4">
+                            <div class="card shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="card-title">
-                                        <i class="icon-doc"></i> Documento de Referencia
-                                    </h5>
-                                    <p class="text-muted small">
-                                        Seleccione el documento de referencia para la comparación
-                                    </p>
-                                    <select id="referenceDoc" class="form-control">
-                                        <option>Seleccionar documento</option>
-                                        <option>Contrato Marco v2.3 (v2.3)</option>
-                                        <option>Formulario de Registro (v1.5)</option>
-                                        <option>Acuerdo de Confidencialidad (v3.0)</option>
-                                        <option>Política de Privacidad (v2.1)</option>
-                                        <option>Contrato de Servicios (v1.8)</option>
-                                    </select>
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">
+                                                <i class="icon-file-check"></i> Reporte de Validación
+                                            </h5>
+                                            <p class="text-muted small mb-0">
+                                                Detalles del reporte y opciones de aprobación
+                                            </p>
+                                        </div>
+                                        <div class="d-flex align-items-start">
+                                            <button class="btn btn-outline-danger btn-sm" style="padding: 5px 10px; margin: 5px;">
+                                                <i class="fas fa-times"></i> Rechazar
+                                            </button>
+                                            <button class="btn btn-dark btn-sm" style="padding: 5px 10px; margin: 5px;">
+                                                <i class="fas fa-check"></i> Aprobar
+                                            </button>
+                                        </div>
+                                        
+
+                                        
+                                    </div>
+                    
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <strong>Documento Analizado:</strong><br>
+                                            Acuerdo de Confidencialidad.docx
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <strong>Documento de Referencia:</strong><br>
+                                            Acuerdo de Confidencialidad
+                                        </div>
+                                    </div>
+                    
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <strong>Fecha de Validación:</strong><br>
+                                            01/04/2024
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <strong>Resultado:</strong><br>
+                                            <span class="text-success"><i class="icon-check-circle"></i> Documento Validado</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                    
+                            <!-- Notificación / Resumen del Reporte (afuera del card) -->
+                            <div class="alert alert-success mt-3" role="alert">
+                                <h5 class="alert-heading mb-2"><i class="icon-check"></i> Resumen del Reporte</h5>
+                                <p class="mb-0">
+                                    El documento "Acuerdo de Confidencialidad.docx" fue validado exitosamente el 01/04/2024, cumpliendo todos los criterios establecidos. No se encontraron diferencias significativas.
+                                </p>
+                            </div>
                         </div>
-
-                </div>
+                    </div>
             </div>
         </div>
     </div>
