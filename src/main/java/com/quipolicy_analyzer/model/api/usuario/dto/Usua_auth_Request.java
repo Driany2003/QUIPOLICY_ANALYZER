@@ -22,12 +22,11 @@ public class Usua_auth_Request {
   private String authRoles;
   private Boolean authIsActive;
 
-  public Usua_auth_Request(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, Integer authId, String authUsername, String authPassword, String authRoles, Boolean authIsActive) {
+  public Usua_auth_Request(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, String authUsername, String authPassword, String authRoles, Boolean authIsActive) {
   this.usuaId = usuaId;
   this.usuaNombre = usuaNombre;
   this.usuaApellido = usuaApellido;
   this.usuaCorreo = usuaCorreo;
-  this.authId = authId;
   this.authUsername = authUsername;
   this.authPassword = authPassword;
   this.authRoles = authRoles;

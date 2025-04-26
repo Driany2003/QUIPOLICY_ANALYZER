@@ -3,159 +3,164 @@
 <%@ include file="includes/header.jspf" %>
 <body>
 <%@ include file="includes/preloader.jspf" %>
+<style>
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    #main-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .modulo-usuarios {
+        flex: 1;
+        padding: 2rem;
+        background-color: #fff;
+    }
+
+    .modulo-usuarios .table {
+        margin-bottom: 0;
+    }
+    .modulo-usuarios h3 {
+        font-weight: bold;
+    }
+    .modulo-usuarios .badge-rol-admin {
+        background-color: #e0c6ff;
+        color: #6a1b9a;
+    }
+    .modulo-usuarios .badge-rol-cliente {
+        background-color: #cce5ff;
+        color: #004085;
+    }
+    .modulo-usuarios .badge-activo {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .modulo-usuarios .badge-inactivo {
+        background-color: #f8d7da;
+        color: #721c24;
+
+    }
+
+
+
+</style>
 <div id="main-wrapper">
     <%@ include file="includes/topbar.jspf" %>
     <%@ include file="includes/left-sidebar.jspf" %>
-    <div class="page-wrapper">
-        <!--  <div class="page-breadcrumb">
-              <div class="row">
-                  <div class="col-12 align-self-center">
-                      <h4 class="page-title">EMPRESA <span class="label label-rounded label-info">Lista</span></h4>
-                  </div>
-              </div>
-          </div>
-          -->
-        <div class="container-fluid">
-            <div class="card mt-3">
-                <div class="container py-5">
-                    <div class="row">
-                        <div class="container-fluid">
-                            <div class="card mt-3">
-                                <div class="container py-5">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h2>Gestión de Usuarios</h2>
-                                            <p>Administre los usuarios del sistema, tanto administradores como clientes</p>
-                                            <button class="btn btn-primary mb-3">Nuevo Usuario</button>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Nombre</th>
-                                                    <th scope="col">Usuario</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Rol</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">Registro</th>
-                                                    <th scope="col">Acciones</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Administrador Principal</td>
-                                                    <td>admin</td>
-                                                    <td>admin@docvalidator.com</td>
-                                                    <td><span class="badge bg-purple">Administrador</span></td>
-                                                    <td><span class="badge bg-success">Activo</span></td>
-                                                    <td>01/01/2024</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Juan Pérez</td>
-                                                    <td>jperez</td>
-                                                    <td>juan.perez@empresa.com</td>
-                                                    <td><span class="badge bg-info">Cliente</span></td>
-                                                    <td><span class="badge bg-success">Activo</span></td>
-                                                    <td>15/01/2024</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>María López</td>
-                                                    <td>mlopez</td>
-                                                    <td>maria.lopez@empresa.com</td>
-                                                    <td><span class="badge bg-info">Cliente</span></td>
-                                                    <td><span class="badge bg-success">Activo</span></td>
-                                                    <td>20/01/2024</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>Carlos Rodríguez</td>
-                                                    <td>crodriguez</td>
-                                                    <td>carlos.rodriguez@docvalidator.com</td>
-                                                    <td><span class="badge bg-purple">Administrador</span></td>
-                                                    <td><span class="badge bg-success">Activo</span></td>
-                                                    <td>05/01/2024</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">5</th>
-                                                    <td>Ana Martínez</td>
-                                                    <td>amartinez</td>
-                                                    <td>ana.martinez@empresa.com</td>
-                                                    <td><span class="badge bg-info">Cliente</span></td>
-                                                    <td><span class="badge bg-danger">Inactivo</span></td>
-                                                    <td>10/02/2024</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">6</th>
-                                                    <td>Roberto Sánchez</td>
-                                                    <td>rsanchez</td>
-                                                    <td>roberto.sanchez@empresa.com</td>
-                                                    <td><span class="badge bg-info">Cliente</span></td>
-                                                    <td><span class="badge bg-success">Activo</span></td>
-                                                    <td>25/02/2024</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
+    <div class="modulo-usuarios">
+
+        <div class="container mt-5 border border-2 border-pink rounded p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h3>Gestión de Usuarios</h3>
+                    <p class="text-muted">Administre los usuarios del sistema, tanto administradores como clientes</p>
                 </div>
+                <button class="btn btn-dark">
+                    <i class="bi bi-person-plus"></i> Nuevo Usuario
+                </button>
+            </div>
+
+            <div class="d-flex gap-2 mb-3">
+                <input type="text" class="form-control" placeholder="Buscar por nombre, usuario o email...">
+                <select class="form-select d-none d-md-flex">
+                    <option selected>Todos los roles</option>
+                    <option>Administrador</option>
+                    <option>Cliente</option>
+                </select>
+                <select class="form-select d-none d-md-flex">
+                    <option selected>Todos los estados</option>
+                    <option>Activo</option>
+                    <option>Inactivo</option>
+                </select>
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col"><input type="checkbox"></th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Registro</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td><input type="checkbox"></td>
+                        <td th:text="${usuario.nombre}">Nombre</td>
+                        <td th:text="${usuario.usuario}">Usuario</td>
+                        <td th:text="${usuario.email}">Email</td>
+                        <td>
+                        <span th:text="${usuario.rol}"
+                              th:classappend="${usuario.rol == 'Administrador'} ? 'badge badge-rol-admin' : 'badge badge-rol-cliente'">
+                          Rol
+                        </span>
+                        </td>
+                        <td>
+                        <span th:text="${usuario.estado}"
+                              th:classappend="${usuario.estado == 'Activo'} ? 'badge badge-activo' : 'badge badge-inactivo'">
+                          Estado
+                        </span>
+                        </td>
+                        <td th:text="${usuario.registro}">Registro</td>
+                        <td>
+                            <button class="btn btn-link p-0" onclick="editarUsuario('Administrador Principal')">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-link p-0 ms-2" onclick="gestionarRoles('Administrador Principal')">
+                                <i class="bi bi-people"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-
     </div>
 
-    <footer class="mt-auto bg-light text-center py-3">
-        <%@ include file="includes/footer.jspf" %>
-    </footer>
+</div>
 
-    <!-- customs -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link href="/static/web/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-    <link href="/static/web/assets/extra-libs/taskboard/css/lobilist.css" rel="stylesheet">
-    <link href="/static/web/assets/extra-libs/taskboard/css/jquery-ui.min.css" rel="stylesheet">
-    <link href="/static/web/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<footer class="mt-auto bg-light text-center py-3">
+    <%@ include file="includes/footer.jspf" %>
+</footer>
 
-    <!-- import -->
-    <%@ include file="includes/all-jquery.jspf" %>
+
+
+<!-- customs -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link href="/static/web/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+<link href="/static/web/assets/extra-libs/taskboard/css/lobilist.css" rel="stylesheet">
+<link href="/static/web/assets/extra-libs/taskboard/css/jquery-ui.min.css" rel="stylesheet">
+<link href="/static/web/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- import -->
+<%@ include file="includes/all-jquery.jspf" %>
 </body>
 </html>

@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import com.quipolicy_analyzer.util.funciones.FxComunes;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class UsuarioImpl implements IUsuarioService {
-
 
   private final UsuarioRepository repository;
   private final AuthorityRepository usuarioAuthorityRepository;
@@ -52,22 +52,20 @@ public class UsuarioImpl implements IUsuarioService {
   public Usua_auth_Response delete(Integer usuaId) {
     log.info("Implements :: delete :: {}", usuaId);
     Optional<UsuarioEntity> usuarioEliminar = repository.findById(usuaId);
-    if(usuarioEliminar.isPresent()){
+    if (usuarioEliminar.isPresent()) {
       UsuarioEntity usuarioEntity = usuarioEliminar.get();
       Optional<UsuarioAuthorityEntity> authorityEliminar = usuarioAuthorityRepository.findById(usuarioEntity.getUsuaId());
-      if(authorityEliminar.isPresent()){
+      if (authorityEliminar.isPresent()) {
         UsuarioAuthorityEntity eliminarAutority = authorityEliminar.get();
         usuarioAuthorityRepository.delete(eliminarAutority);
         log.info(" authority eliminado  con ID -> {}", usuarioEntity.getUsuaId());
-      }
-      else{
+      } else {
         log.info(" autority no encontrado para el usuario con ID -> {}", usuarioEntity.getUsuaId());
       }
       repository.delete(usuarioEntity);
       log.info("  usuario eliminado con ID -> {}", usuarioEntity.getUsuaId());
       return convertEntityToResponse(usuarioEntity);
-    }
-    else{
+    } else {
       log.info(" usuario no encontrado para eliminar con ID -> {}", usuaId);
       return new Usua_auth_Response();
     }
@@ -78,7 +76,7 @@ public class UsuarioImpl implements IUsuarioService {
   public Usua_auth_Response findById(Integer usuaId) {
     log.info("Implements :: findById :: {}", usuaId);
     Optional<UsuarioEntity> Usua_auth_Response = repository.findById(usuaId);
-    if(Usua_auth_Response.isPresent()){
+    if (Usua_auth_Response.isPresent()) {
       UsuarioEntity usuarioEntity = Usua_auth_Response.get();
       Usua_auth_Response response = new Usua_auth_Response();
       response.setUsuaNombre(usuarioEntity.getUsuaNombre());
@@ -98,8 +96,7 @@ public class UsuarioImpl implements IUsuarioService {
       }
 
       return response;
-    }
-    else{
+    } else {
       log.info(" Usuario no encontrado con Id-> {}", usuaId);
       return null;
     }
@@ -107,8 +104,41 @@ public class UsuarioImpl implements IUsuarioService {
 
   @Override
   public Usua_auth_Response update(Usua_auth_Request request) {
-    return null;
-    //tengo que crear un dto para uthoruty y usaurio para actualizar en una tabla.
+    log.info("Implements :: update :: {}", request.getUsuaId());
+
+    // Buscar el usuario a actualizar
+    UsuarioEntity usuarioExistente = repository.findById(request.getUsuaId()).orElse(null);
+    if (usuarioExistente == null) {
+      log.info("Usuario no encontrado con ID -> {}", request.getUsuaId());
+      return new Usua_auth_Response(); // Retorna una respuesta vacía si no se encuentra el usuario
+    }
+
+    usuarioExistente.setUsuaNombre(request.getUsuaNombre());
+    usuarioExistente.setUsuaApellido(request.getUsuaApellido());
+    usuarioExistente.setUsuaCorreo(request.getUsuaCorreo());
+    usuarioExistente.setUsuaFechaModificado(LocalDateTime.now());
+
+    UsuarioEntity usuarioActualizado = repository.save(usuarioExistente);
+    log.info("Usuario actualizado con ID -> {}", usuarioExistente.getUsuaId());
+
+    UsuarioAuthorityEntity authorityEntity = usuarioAuthorityRepository.findById(request.getUsuaId()).orElse(null);
+
+    if (authorityEntity != null) {
+      authorityEntity.setAuthUsername(request.getAuthUsername());
+      authorityEntity.setAuthPassword(request.getAuthPassword());
+      authorityEntity.setAuthRoles(request.getAuthRoles());
+      authorityEntity.setAuthIsActive(request.getAuthIsActive());
+      authorityEntity.setAuthFechaModificado(LocalDateTime.now());
+
+      // Guardar los cambios en la entidad UsuarioAuthorityEntity
+      usuarioAuthorityRepository.save(authorityEntity);
+      log.info("Authority actualizada para el usuario con ID -> {}", usuarioExistente.getUsuaId());
+    } else {
+      log.info("Authority no encontrada para el usuario con ID -> {}", request.getUsuaId());
+    }
+
+    // Convertir la entidad actualizada a la respuesta
+    return convertEntityToResponse(usuarioActualizado);
   }
 
   @Override
@@ -121,20 +151,19 @@ public class UsuarioImpl implements IUsuarioService {
     return new Usua_auth_Response((Integer) map.get("usuaId"), (String) map.get("usuaNombre"), (String) map.get("usuaApellido"), (String) map.get("usuaCorreo"), (String) map.get("authUsername"), (String) map.get("authPassword"), (String) map.get("authRoles"), (Boolean) map.get("authIsActive"));
   }
 
-
-  private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity){
+  private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity) {
     Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;
   }
 
-  private UsuarioEntity convertRequestToEntity(Usua_auth_Request request){
+  private UsuarioEntity convertRequestToEntity(Usua_auth_Request request) {
     UsuarioEntity entity = new UsuarioEntity();
     BeanUtils.copyProperties(request, entity);
     return entity;
   }
 
-  private Usua_auth_Response convertEntityToResponseDTO(UsuarioEntity entity){
+  private Usua_auth_Response convertEntityToResponseDTO(UsuarioEntity entity) {
     Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;
