@@ -3,7 +3,8 @@ package com.quipolicy_analyzer.business.Impl;
 import com.quipolicy_analyzer.business.IUsuarioService;
 import com.quipolicy_analyzer.model.api.usuario.UsuarioRequest;
 import com.quipolicy_analyzer.model.api.usuario.UsuarioResponse;
-import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_listar_Response;
+import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_Request;
+import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_Response;
 import com.quipolicy_analyzer.model.entity.UsuarioAuthorityEntity;
 import com.quipolicy_analyzer.model.entity.UsuarioEntity;
 import com.quipolicy_analyzer.repository.AuthorityRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.quipolicy_analyzer.util.funciones.FxComunes;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ public class UsuarioImpl implements IUsuarioService {
   private final AuthorityRepository usuarioAuthorityRepository;
 
   @Override
-  public UsuarioResponse create(UsuarioRequest request) {
+  public Usua_auth_Response create(Usua_auth_Request request) {
     log.info("Implements :: create :: {}", request.getUsuaId());
     UsuarioEntity usuarioCreado = convertRequestToEntity(request);
     usuarioCreado.setUsuaFechaRegistrado(LocalDateTime.now());
@@ -37,14 +39,17 @@ public class UsuarioImpl implements IUsuarioService {
     UsuarioAuthorityEntity usuarioAuthorityEntityCreado = new UsuarioAuthorityEntity();
     usuarioAuthorityEntityCreado.setAuthFechaRegistrado(LocalDateTime.now());
     usuarioAuthorityEntityCreado.setAuthIsActive(true);
+    usuarioAuthorityEntityCreado.setUsuaId(guardarUsuario.getUsuaId());
+    usuarioAuthorityEntityCreado.setAuthPassword(request.getAuthPassword());
+    usuarioAuthorityEntityCreado.setAuthRoles(request.getAuthRoles());
+    usuarioAuthorityEntityCreado.setAuthUsername(request.getAuthUsername());
     usuarioAuthorityRepository.save(usuarioAuthorityEntityCreado);
     FxComunes.printJson("UsuarioCreadoRequest", request);
     return convertEntityToResponse(guardarUsuario);
-    //validar
   }
 
   @Override
-  public UsuarioResponse delete(Integer usuaId) {
+  public Usua_auth_Response delete(Integer usuaId) {
     log.info("Implements :: delete :: {}", usuaId);
     Optional<UsuarioEntity> usuarioEliminar = repository.findById(usuaId);
     if(usuarioEliminar.isPresent()){
@@ -64,21 +69,34 @@ public class UsuarioImpl implements IUsuarioService {
     }
     else{
       log.info(" usuario no encontrado para eliminar con ID -> {}", usuaId);
-      return new UsuarioResponse();
+      return new Usua_auth_Response();
     }
 
   }
 
   @Override
-  public UsuarioResponse findById(Integer usuaId) {
+  public Usua_auth_Response findById(Integer usuaId) {
     log.info("Implements :: findById :: {}", usuaId);
-    Optional<UsuarioEntity> usuarioResponse = repository.findById(usuaId);
-    if(usuarioResponse.isPresent()){
-      UsuarioEntity usuarioEntity = usuarioResponse.get();
-      UsuarioResponse response = new UsuarioResponse();
+    Optional<UsuarioEntity> Usua_auth_Response = repository.findById(usuaId);
+    if(Usua_auth_Response.isPresent()){
+      UsuarioEntity usuarioEntity = Usua_auth_Response.get();
+      Usua_auth_Response response = new Usua_auth_Response();
       response.setUsuaNombre(usuarioEntity.getUsuaNombre());
       response.setUsuaApellido(usuarioEntity.getUsuaApellido());
       response.setUsuaCorreo(usuarioEntity.getUsuaCorreo());
+
+      Optional<UsuarioAuthorityEntity> authorityResponse = usuarioAuthorityRepository.findById(usuarioEntity.getUsuaId());
+
+      if (authorityResponse.isPresent()) {
+        UsuarioAuthorityEntity authorityEntity = authorityResponse.get();
+        response.setAuthIsActive(authorityEntity.getAuthIsActive());
+        response.setAuthUsername(authorityEntity.getAuthUsername());
+        response.setAuthRoles(authorityEntity.getAuthRoles());
+
+      } else {
+        log.info("Authority no encontrada para el usuario con Id-> {}", usuaId);
+      }
+
       return response;
     }
     else{
@@ -88,32 +106,36 @@ public class UsuarioImpl implements IUsuarioService {
   }
 
   @Override
-  public UsuarioResponse update(UsuarioRequest request) {
+  public Usua_auth_Response update(Usua_auth_Request request) {
     return null;
     //tengo que crear un dto para uthoruty y usaurio para actualizar en una tabla.
   }
 
   @Override
-  public List<Usua_auth_listar_Response> findAll() {
+  public List<Usua_auth_Response> findAll() {
     log.info("Implements :: findAll");
-    return repository.findAll().stream().map(this::convertEntityToResponseDTO).collect(Collectors.toList());
+    return repository.findAllUsers().stream().map(this::convertToUsuarioDTO).collect(Collectors.toList());
+  }
+
+  private Usua_auth_Response convertToUsuarioDTO(Map<String, Object> map) {
+    return new Usua_auth_Response((Integer) map.get("usuaId"), (String) map.get("usuaNombre"), (String) map.get("usuaApellido"), (String) map.get("usuaCorreo"), (String) map.get("authUsername"), (String) map.get("authPassword"), (String) map.get("authRoles"), (Boolean) map.get("authIsActive"));
   }
 
 
-  private UsuarioResponse convertEntityToResponse(UsuarioEntity entity){
-    UsuarioResponse response = new UsuarioResponse();
+  private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity){
+    Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;
   }
 
-  private UsuarioEntity convertRequestToEntity(UsuarioRequest request){
+  private UsuarioEntity convertRequestToEntity(Usua_auth_Request request){
     UsuarioEntity entity = new UsuarioEntity();
     BeanUtils.copyProperties(request, entity);
     return entity;
   }
 
-  private Usua_auth_listar_Response convertEntityToResponseDTO(UsuarioEntity entity){
-    Usua_auth_listar_Response response = new Usua_auth_listar_Response();
+  private Usua_auth_Response convertEntityToResponseDTO(UsuarioEntity entity){
+    Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;
   }

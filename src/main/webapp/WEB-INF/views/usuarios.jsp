@@ -19,12 +19,116 @@
             <div class="card mt-3">
                 <div class="container py-5">
                     <div class="row">
-
+                        <div class="container-fluid">
+                            <div class="card mt-3">
+                                <div class="container py-5">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2>Gestión de Usuarios</h2>
+                                            <p>Administre los usuarios del sistema, tanto administradores como clientes</p>
+                                            <button class="btn btn-primary mb-3">Nuevo Usuario</button>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Usuario</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Rol</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Registro</th>
+                                                    <th scope="col">Acciones</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Administrador Principal</td>
+                                                    <td>admin</td>
+                                                    <td>admin@docvalidator.com</td>
+                                                    <td><span class="badge bg-purple">Administrador</span></td>
+                                                    <td><span class="badge bg-success">Activo</span></td>
+                                                    <td>01/01/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Juan Pérez</td>
+                                                    <td>jperez</td>
+                                                    <td>juan.perez@empresa.com</td>
+                                                    <td><span class="badge bg-info">Cliente</span></td>
+                                                    <td><span class="badge bg-success">Activo</span></td>
+                                                    <td>15/01/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>María López</td>
+                                                    <td>mlopez</td>
+                                                    <td>maria.lopez@empresa.com</td>
+                                                    <td><span class="badge bg-info">Cliente</span></td>
+                                                    <td><span class="badge bg-success">Activo</span></td>
+                                                    <td>20/01/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">4</th>
+                                                    <td>Carlos Rodríguez</td>
+                                                    <td>crodriguez</td>
+                                                    <td>carlos.rodriguez@docvalidator.com</td>
+                                                    <td><span class="badge bg-purple">Administrador</span></td>
+                                                    <td><span class="badge bg-success">Activo</span></td>
+                                                    <td>05/01/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">5</th>
+                                                    <td>Ana Martínez</td>
+                                                    <td>amartinez</td>
+                                                    <td>ana.martinez@empresa.com</td>
+                                                    <td><span class="badge bg-info">Cliente</span></td>
+                                                    <td><span class="badge bg-danger">Inactivo</span></td>
+                                                    <td>10/02/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">6</th>
+                                                    <td>Roberto Sánchez</td>
+                                                    <td>rsanchez</td>
+                                                    <td>roberto.sanchez@empresa.com</td>
+                                                    <td><span class="badge bg-info">Cliente</span></td>
+                                                    <td><span class="badge bg-success">Activo</span></td>
+                                                    <td>25/02/2024</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
 
