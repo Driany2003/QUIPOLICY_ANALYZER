@@ -27,7 +27,7 @@
                                         <i class="icon-clock"></i> Reportes Pendientes
                                     </h5>
                                     <p class="text-muted small">
-                                        Reportes que requieren revisión y aprobación
+                                        Reportes que requieren revisión y aprobación 
                                     </p>
                                     <!-- Contenedor Scrollable -->
                                     <div style="overflow-y: auto; flex-grow: 1; padding-right: 5px;">
