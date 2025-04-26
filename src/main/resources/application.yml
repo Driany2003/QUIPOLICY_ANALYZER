@@ -1,5 +1,4 @@
-
-#Informacion del proyecto
+# Información del proyecto
 info:
   project:
     title: Quipolicy_analyzer - SISTEMA AUTOMATIZADO DE COMPARACION DE POLIZAS
@@ -7,13 +6,13 @@ info:
     description: Quipolicy_analyzer - SISTEMA AUTOMATIZADO DE COMPARACION DE POLIZAS
     version: 0.1.0-SNAPSHOT
 
-#Configuracion del Servidor
+# Configuración del Servidor
 server:
   port: 8080
   servlet:
     context-path:
 
-#Configuraciones para Spring - Base de Datos
+# Configuraciones para Spring - Base de Datos
 spring:
   profiles:
     active: dev
@@ -27,11 +26,18 @@ spring:
       suffix: .jsp
     static-path-pattern: /static/**
 
-
-    # CREDENCIALES PARA CONEXION A LA BASE DE DATOS
-    #  port: 1433
-    #  host: 161.132.55.86
-    #  username: SA
-    #  password: Lima1234..
-    #  nombre de bd: BD_QUIPOLICY
-    #  Name cabecera: BD_QUIPOLCY
+  datasource:
+    url: jdbc:sqlserver://161.132.55.86:1433;databaseName=BD_QUIPOLICY;encrypt=false
+    username: SA
+    password: Lima1234..
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true # Opcional: muestra las consultas SQL en la consola
+        format_sql: true # Opcional: formatea las consultas SQL para facilitar la lectura
+        physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: off

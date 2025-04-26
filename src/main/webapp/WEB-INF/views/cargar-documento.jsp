@@ -184,6 +184,7 @@
 
     // Evento drop
     dropzone.addEventListener('drop', ev => {
+
         ev.preventDefault();
         dropzone.classList.remove('bg-light');
         processPDF(ev.dataTransfer.files[0]);

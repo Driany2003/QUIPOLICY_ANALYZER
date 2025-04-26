@@ -590,7 +590,7 @@ Version 4.3.4 (2016-02-11)
     Fixed so events gets properly dispatched in shadow dom. Patch provided by Nazar Mokrynskyi.
 Version 4.3.3 (2016-01-14)
     Added new table_resize_bars configuration setting.  This setting allows you to disable the table resize bars.
-    Added new beforeInitialize event to tinymce.util.XHR lets you modify XHR properties before open. Patch contributed by Brent Clintel.
+    Added new beforeInitialize event to tinymce.com.quipolicy_analyzer.util.XHR lets you modify XHR properties before open. Patch contributed by Brent Clintel.
     Added new autolink_pattern setting to autolink plugin. Enables you to override the default autolink formats. Patch contributed by Ben Tiedt.
     Added new charmap option that lets you override the default charmap of the charmap plugin.
     Added new charmap_append option that lets you add new characters to the default charmap of the charmap plugin.
@@ -732,7 +732,7 @@ Version 4.2.0 (2015-06-25)
     Added new flat default skin to make the UI more modern.
     Added new imagetools plugin, lets you crop/resize and apply filters to images.
     Added new contextual toolbars support to the API lets you add floating toolbars for specific CSS selectors.
-    Added new promise feature fill as tinymce.util.Promise.
+    Added new promise feature fill as tinymce.com.quipolicy_analyzer.util.Promise.
     Added new built in image upload feature lets you upload any base64 encoded image within the editor as files.
     Fixed bug where resize handles would appear in the right position in the wrong editor when switching between resizable content in different inline editors.
     Fixed bug where tables would not be inserted in inline mode due to previous float panel fix.
@@ -867,7 +867,7 @@ Version 4.1.4 (2014-08-21)
     Fixed so the table advtab options isn't separated by an underscore to normalize naming with image_advtab option.
     Fixed so the table cell dialog has proper padding when the advanced tab in disabled.
 Version 4.1.3 (2014-07-29)
-    Added event binding logic to tinymce.util.XHR making it possible to override headers and settings before any request is made.
+    Added event binding logic to tinymce.com.quipolicy_analyzer.util.XHR making it possible to override headers and settings before any request is made.
     Fixed bug where drag events wasn't fireing properly on older IE versions since the event handlers where bound to document.
     Fixed bug where drag/dropping contents within the editor on IE would force the contents into plain text mode even if it was internal content.
     Fixed bug where IE 7 wouldn't open menus properly due to a resize bug in the browser auto closing them immediately.
@@ -931,7 +931,7 @@ Version 4.1.0 (2014-06-18)
     Added new color_picker_callback option to enable you to add custom color pickers to the editor.
     Added new advanced tabs to table/cell/row dialogs to enable you to select colors for border/background.
     Added new colorpicker plugin that lets you select colors from a hsv color picker.
-    Added new tinymce.util.Color class to handle color parsing and converting.
+    Added new tinymce.com.quipolicy_analyzer.util.Color class to handle color parsing and converting.
     Added new colorpicker UI widget element lets you add a hsv color picker to any form/window.
     Added new textpattern plugin that allows you to use markdown like text patterns to format contents.
     Added new resize helper element that shows the current width & height while resizing.
