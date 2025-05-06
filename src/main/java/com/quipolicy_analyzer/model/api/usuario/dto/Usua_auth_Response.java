@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,8 +24,9 @@ public class Usua_auth_Response {
   private String authPassword;
   private String authRoles;
   private Boolean authIsActive;
+  private String authFechaRegistrado;
 
-  public Usua_auth_Response(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, String authUsername, String authPassword, String authRoles, Boolean authIsActive) {
+  public Usua_auth_Response(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, String authUsername, String authPassword, String authRoles, Boolean authIsActive,String authFechaRegistrado) {
   this.usuaId = usuaId;
   this.usuaNombre = usuaNombre;
   this.usuaApellido = usuaApellido;
@@ -31,6 +35,6 @@ public class Usua_auth_Response {
   this.authPassword = authPassword;
   this.authRoles = authRoles;
   this.authIsActive = authIsActive;
-
+  this.authFechaRegistrado = authFechaRegistrado;
   }
 }

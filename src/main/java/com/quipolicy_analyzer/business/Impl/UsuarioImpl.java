@@ -9,13 +9,16 @@ import com.quipolicy_analyzer.model.entity.UsuarioAuthorityEntity;
 import com.quipolicy_analyzer.model.entity.UsuarioEntity;
 import com.quipolicy_analyzer.repository.AuthorityRepository;
 import com.quipolicy_analyzer.repository.UsuarioRepository;
+import com.quipolicy_analyzer.util.funciones.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import com.quipolicy_analyzer.util.funciones.FxComunes;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -148,7 +151,11 @@ public class UsuarioImpl implements IUsuarioService {
   }
 
   private Usua_auth_Response convertToUsuarioDTO(Map<String, Object> map) {
-    return new Usua_auth_Response((Integer) map.get("usuaId"), (String) map.get("usuaNombre"), (String) map.get("usuaApellido"), (String) map.get("usuaCorreo"), (String) map.get("authUsername"), (String) map.get("authPassword"), (String) map.get("authRoles"), (Boolean) map.get("authIsActive"));
+
+    Timestamp timestamp = (Timestamp) map.get("authFechaRegistrado");
+    LocalDateTime fechaRegistrado = timestamp.toLocalDateTime();
+    String formattedFechaRegistrado = DateUtil.formatFechaRegistrado(fechaRegistrado);
+    return new Usua_auth_Response((Integer) map.get("usuaId"), (String) map.get("usuaNombre"), (String) map.get("usuaApellido"), (String) map.get("usuaCorreo"), (String) map.get("authUsername"), (String) map.get("authPassword"), (String) map.get("authRoles"), (Boolean) map.get("authIsActive"), formattedFechaRegistrado);
   }
 
   private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity) {

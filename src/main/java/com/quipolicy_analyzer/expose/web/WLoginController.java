@@ -16,7 +16,7 @@ public class WLoginController {
     return "login";
   }
 
-  @RequestMapping(value = {"/quipolicy/validar/consolidar-firmass"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/quipolicy/menu/validar/consolidar-firmass"}, method = RequestMethod.GET)
   public String welcome() {
     return "consolidar-firmas";
   }
