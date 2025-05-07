@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    alert("hola")
     cargarUsuarios();
 
     // Función para cargar usuarios
@@ -16,14 +15,26 @@ $(document).ready(function () {
                         <td>${usuario.usuaNombre} ${usuario.usuaApellido}</td>
                         <td>${usuario.authUsername}</td>
                         <td>${usuario.usuaCorreo}</td>
-                        <td><span class="badge ${usuario.authRoles === 'Administrador' ? 'badge-rol-admin' : 'badge-rol-cliente'}">${usuario.authRoles}</span></td>
-                        <td><span class="badge ${usuario.authIsActive === 'Activo' ? 'badge-activo' : 'badge-inactivo'}">${usuario.authIsActive}</span></td>
+                        <td>
+                            <span class="badge 
+                                ${usuario.authRoles === 'ADMINISTRADOR' ? 'badge-rol-admin' :
+                                (usuario.authRoles === 'CLIENTE' ? 'badge-rol-cliente' :
+                                (usuario.authRoles === 'TRABAJADOR' ? 'badge-rol-trabajador' : ''))}">
+                                ${usuario.authRoles}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge ${usuario.authIsActive === true ? 'badge-activo' : 'badge-inactivo'}">
+                                ${usuario.authIsActive === true ? 'Activo' : 'Inactivo'}
+                            </span>
+                        </td>
                         <td>${usuario.authFechaRegistrado}</td>
                         <td>
-                            <button class="btn btn-link p-0" onclick="editarUsuario('${usuario.id}')">
+                            <button type="button" class="btn btn-link p-0 editarUsuario" data-id="${usuario.usuaId}">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
-                            <button class="btn btn-link p-0 ms-2" onclick="gestionarRoles('${usuario.id}')">
+
+                            <button class="btn btn-link p-0 ms-2" onclick="gestionarRoles('${usuario.usuaId}')">
                                 <i class="bi bi-people"></i>
                             </button>
                         </td>
@@ -31,6 +42,11 @@ $(document).ready(function () {
                     `;
                 });
                 $('.usuariosTableBody').html(usuariosHTML);
+                $('.editarUsuario').click(function (event) {
+                    event.preventDefault();
+                    var usuaId = $(this).data('id');
+                    editarUsuario(usuaId);
+                });
             },
             error: function (xhr, status, error) {
                 console.error('Error al cargar los usuarios:', error);
@@ -38,55 +54,39 @@ $(document).ready(function () {
         });
     }
 
-    // Función para editar usuario
-    window.editarUsuario = function (id) {
-        // Aquí puedes redirigir o abrir un modal para editar el usuario
-        $.ajax({
-            url: '/ruta/para/obtener/usuario/' + id, // Asegúrate de colocar la ruta correcta
-            method: 'GET',
-            success: function (usuario) {
-                // Rellenar los datos en un formulario o en un modal
-                console.log(usuario); // Aquí puedes llenar el formulario con los datos del usuario
-            },
-            error: function (xhr, status, error) {
-                console.error('Error al obtener el usuario:', error);
-            }
-        });
-    };
-
-    // Función para gestionar roles
-    window.gestionarRoles = function (id) {
-        // Aquí puedes redirigir o abrir un modal para gestionar los roles
-        $.ajax({
-            url: '/ruta/para/obtener/roles/' + id, // Asegúrate de colocar la ruta correcta
-            method: 'GET',
-            success: function (roles) {
-                console.log(roles); // Aquí puedes llenar el formulario con los roles disponibles
-            },
-            error: function (xhr, status, error) {
-                console.error('Error al obtener los roles:', error);
-            }
-        });
-    };
-
     // Función para agregar un nuevo usuario
-    $('#nuevoUsuarioBtn').on('click', function () {
-        // Abrir modal o formulario para agregar nuevo usuario
-        // Ejemplo de llamada AJAX para guardar el nuevo usuario
-        let nuevoUsuario = {
-            nombre: $('#nombre').val(),
-            usuario: $('#usuario').val(),
-            email: $('#email').val(),
-            rol: $('#rol').val(),
-            estado: $('#estado').val()
+    $('#submitUser').on('click', function () {
+        $('#createUserModal').modal('show');
+
+        // Verificar si los campos están completos
+        if ($('#usuaNombre').val() === "" || $('#usuaApellido').val() === "" || $('#usuaCorreo').val() === "" || $('#authUsername').val() === "" || $('#authPassword').val() === "") {
+            toastr.error("Por favor complete todos los campos.");
+            return;
+        }
+
+        if ($('#authPassword').val() !== $('#authPasswordConfirm').val()) {
+            toastr.error("Las contraseñas no coinciden. Por favor, ingrese las mismas contraseñas.");
+            return;
+        }
+
+        var nuevoUsuario = {
+            usuaNombre: $('#usuaNombre').val(),
+            usuaApellido: $('#usuaApellido').val(),
+            usuaCorreo: $('#usuaCorreo').val(),
+            authUsername: $('#authUsername').val(),
+            authPassword: $('#authPassword').val(),
+            authRoles: $('#authRoles').val(),
         };
 
         $.ajax({
             url: '/usuario/create', // Asegúrate de colocar la ruta correcta
             method: 'POST',
-            data: nuevoUsuario,
+            contentType: 'application/json',
+            data: JSON.stringify(nuevoUsuario),
             success: function (response) {
-                alert('Usuario creado exitosamente');
+                toastr.success('Usuario creado exitosamente');
+                $('#createUserModal').modal('hide'); // Cerrar el modal
+                $('#createUserForm')[0].reset();
                 cargarUsuarios(); // Recargar la lista de usuarios
             },
             error: function (xhr, status, error) {
@@ -95,23 +95,69 @@ $(document).ready(function () {
         });
     });
 
+    function editarUsuario(usuaId) {
+        // Hacer una solicitud para obtener los datos del usuario
+        $.ajax({
+            url: `/usuario/find-by-id/${usuaId}`, // Asegúrate de que la URL sea correcta para obtener el usuario
+            method: 'GET',
+            success: function (usuario) {
+                // Llenar el formulario del modal con los datos del usuario
+                $('#usuaId').val(usuaId);
+                $('#usuaNombreUpadte').val(usuario.usuaNombre);
+                $('#usuaApellidoUpadte').val(usuario.usuaApellido);
+                $('#usuaCorreoUpdate').val(usuario.usuaCorreo);
+                $('#authUsernameUpdate').val(usuario.authUsername);
+                $('#authRolesUpdate').val(usuario.authRoles);
+                $('#authIsActiveUpdate').val(usuario.authIsActive.toString());
+                $('#authPasswordUpdate').val('');
+                $('#updateUserModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al obtener los datos del usuario:', error);
+            }
+        });
+    }
+
+    $('#enablePasswordChangeBtn').on('click', function () {
+        $('#authPasswordUpdate').prop('readonly', false);
+        $('#passwordHelp').text('Puedes ahora ingresar una nueva contraseña.');
+        $(this).hide();
+    });
+
+    $('#updateUserModal').on('hidden.bs.modal', function () {
+        $('#authPasswordUpdate').prop('readonly', true);
+        $('#passwordHelp').text('Si deseas cambiar la contraseña, haz clic en el botón para habilitar el campo.');
+        $('#enablePasswordChangeBtn').show();
+    });
+
+
     // Función para actualizar un usuario
-    $('#actualizarUsuarioBtn').on('click', function () {
-        let usuarioActualizado = {
-            id: $('#usuarioId').val(),
-            nombre: $('#nombre').val(),
-            usuario: $('#usuario').val(),
-            email: $('#email').val(),
-            rol: $('#rol').val(),
-            estado: $('#estado').val()
+    $('#submitUserUpdate').on('click', function () {
+        // Verificar si los campos están completos
+        if ($('#usuaNombreUpadte').val() === "" || $('#usuaApellidoUpadte').val() === "" || $('#usuaCorreoUpdate').val() === "" || $('#authUsernameUpdate').val() === "") {
+            toastr.error("Por favor complete todos los campos.");
+            return;
+        }
+
+        var usuarioActualizado = {
+            usuaId: $('#usuaId').val(),
+            usuaNombre: $('#usuaNombreUpadte').val(),
+            usuaApellido: $('#usuaApellidoUpadte').val(),
+            usuaCorreo: $('#usuaCorreoUpdate').val(),
+            authUsername: $('#authUsernameUpdate').val(),
+            authPassword: $('#authPasswordUpdate').val(),
+            authRoles: $('#authRolesUpdate').val(),
+            authIsActive: $('#authIsActiveUpdate').val(),
         };
 
         $.ajax({
-            url: '/usuario/update', // Asegúrate de colocar la ruta correcta
+            url: '/usuario/update',
             method: 'PUT',
-            data: usuarioActualizado,
+            contentType: 'application/json',
+            data: JSON.stringify(usuarioActualizado),
             success: function (response) {
-                alert('Usuario actualizado exitosamente');
+                toastr.success('Usuario actualizado exitosamente');
+                $('#updateUserModal').modal('hide');
                 cargarUsuarios(); // Recargar la lista de usuarios
             },
             error: function (xhr, status, error) {
@@ -145,7 +191,6 @@ $(document).ready(function () {
         }
     });
 });
-
 $('#tableFilter').on('keyup', function () {
     var term = $(this).val().toLowerCase();
     $('#usuarioTable tbody tr').each(function () {

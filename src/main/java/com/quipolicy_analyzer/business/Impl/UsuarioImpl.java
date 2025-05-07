@@ -13,6 +13,7 @@ import com.quipolicy_analyzer.util.funciones.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.quipolicy_analyzer.util.funciones.FxComunes;
 
@@ -34,7 +35,11 @@ public class UsuarioImpl implements IUsuarioService {
 
   @Override
   public Usua_auth_Response create(Usua_auth_Request request) {
-    log.info("Implements :: create :: {}", request.getUsuaId());
+    log.info("Implements :: create :: {}", request);
+
+    BCryptPasswordEncoder encriptarContrasena = new BCryptPasswordEncoder();
+    String contrasenaEncriptada= encriptarContrasena.encode(request.getAuthPassword());
+
     UsuarioEntity usuarioCreado = convertRequestToEntity(request);
     usuarioCreado.setUsuaFechaRegistrado(LocalDateTime.now());
     UsuarioEntity guardarUsuario = repository.save(usuarioCreado);
@@ -43,7 +48,7 @@ public class UsuarioImpl implements IUsuarioService {
     usuarioAuthorityEntityCreado.setAuthFechaRegistrado(LocalDateTime.now());
     usuarioAuthorityEntityCreado.setAuthIsActive(true);
     usuarioAuthorityEntityCreado.setUsuaId(guardarUsuario.getUsuaId());
-    usuarioAuthorityEntityCreado.setAuthPassword(request.getAuthPassword());
+    usuarioAuthorityEntityCreado.setAuthPassword(contrasenaEncriptada);
     usuarioAuthorityEntityCreado.setAuthRoles(request.getAuthRoles());
     usuarioAuthorityEntityCreado.setAuthUsername(request.getAuthUsername());
     usuarioAuthorityRepository.save(usuarioAuthorityEntityCreado);
@@ -127,8 +132,12 @@ public class UsuarioImpl implements IUsuarioService {
     UsuarioAuthorityEntity authorityEntity = usuarioAuthorityRepository.findById(request.getUsuaId()).orElse(null);
 
     if (authorityEntity != null) {
+      if(request.getAuthPassword() != null && !request.getAuthPassword().isEmpty()){
+       BCryptPasswordEncoder encriptarContrasena = new BCryptPasswordEncoder();
+       String contrasenaEncriptada = encriptarContrasena.encode(request.getAuthPassword());
+        authorityEntity.setAuthPassword(contrasenaEncriptada);
+      }
       authorityEntity.setAuthUsername(request.getAuthUsername());
-      authorityEntity.setAuthPassword(request.getAuthPassword());
       authorityEntity.setAuthRoles(request.getAuthRoles());
       authorityEntity.setAuthIsActive(request.getAuthIsActive());
       authorityEntity.setAuthFechaModificado(LocalDateTime.now());

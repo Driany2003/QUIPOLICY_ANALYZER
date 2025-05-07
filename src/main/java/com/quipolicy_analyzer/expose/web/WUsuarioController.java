@@ -43,7 +43,7 @@ public class WUsuarioController {
     return new ResponseEntity<>(response,HttpStatus.OK);
   }
 
-  @PostMapping("/delete/{usuaId}")
+  @DeleteMapping("/delete/{usuaId}")
   public ResponseEntity<Usua_auth_Response> delete (@PathVariable Integer usuaId){
     log.info("Controller :: delete :: {}", usuaId);
     Usua_auth_Response response = usuarioService.delete(usuaId);
@@ -51,7 +51,7 @@ public class WUsuarioController {
   }
 
 
-  @PostMapping("/update")
+  @PutMapping("/update")
   public ResponseEntity<Usua_auth_Response> update (@RequestBody Usua_auth_Request request){
     log.info("Controller :: update :: {}", request.getUsuaId());
     FxComunes.printJson("Datos del usuario a actualizar request: ", request);
