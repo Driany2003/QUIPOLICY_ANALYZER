@@ -82,7 +82,6 @@
                         <table id="usuarioTable" class="table table-hover align-middle">
                             <thead class="table-light">
                             <tr>
-                                <th scope="col"><input type="checkbox"></th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Email</th>
@@ -99,10 +98,9 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
+
 <!-- Modal para crear un usuario -->
 <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -110,7 +108,6 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="createUserModalLabel">Crear Nuevo Usuario</h5>
                 <button type="button" class="btn p-0" data-bs-dismiss="modal" aria-label="Close">
-                    <!-- Icono mdi-close-circle -->
                     <i class="mdi mdi-close"></i>
                 </button>
             </div>
@@ -158,7 +155,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal para actualizar un usuario -->
 <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -221,6 +217,30 @@
         </div>
     </div>
 </div>
+
+<!-- Modal de confirmación para eliminar un usuario -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn p-0" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                </button>
+                <input type="hidden" id="usuaDeleteId">
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <footer class="mt-auto bg-light text-center py-3">
     <%@ include file="includes/footer.jspf" %>
