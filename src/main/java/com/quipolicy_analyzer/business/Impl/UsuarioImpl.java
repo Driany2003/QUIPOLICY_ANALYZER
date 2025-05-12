@@ -1,8 +1,6 @@
 package com.quipolicy_analyzer.business.Impl;
 
 import com.quipolicy_analyzer.business.IUsuarioService;
-import com.quipolicy_analyzer.model.api.usuario.UsuarioRequest;
-import com.quipolicy_analyzer.model.api.usuario.UsuarioResponse;
 import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_Request;
 import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_Response;
 import com.quipolicy_analyzer.model.entity.UsuarioAuthorityEntity;
@@ -19,7 +17,6 @@ import com.quipolicy_analyzer.util.funciones.FxComunes;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,13 +29,24 @@ public class UsuarioImpl implements IUsuarioService {
 
   private final UsuarioRepository repository;
   private final AuthorityRepository usuarioAuthorityRepository;
+  private final BCryptPasswordEncoder passwordEncoder;
+
+
+  /*LOGIN*/
+  @Override
+  public Usua_auth_Response findUsuarioByAuthUsername(String username) {
+    log.debug("Implements :: findByUsuUsername :: " + username);
+    return repository.findByAuthUsername(username).map(this::convertEntityToResponse).orElse(null);
+  }
+
+  /*FIN LOGIN*/
 
   @Override
   public Usua_auth_Response create(Usua_auth_Request request) {
     log.info("Implements :: create :: {}", request);
 
     BCryptPasswordEncoder encriptarContrasena = new BCryptPasswordEncoder();
-    String contrasenaEncriptada= encriptarContrasena.encode(request.getAuthPassword());
+    String contrasenaEncriptada = encriptarContrasena.encode(request.getAuthPassword());
 
     UsuarioEntity usuarioCreado = convertRequestToEntity(request);
     usuarioCreado.setUsuaFechaRegistrado(LocalDateTime.now());
@@ -132,9 +140,9 @@ public class UsuarioImpl implements IUsuarioService {
     UsuarioAuthorityEntity authorityEntity = usuarioAuthorityRepository.findById(request.getUsuaId()).orElse(null);
 
     if (authorityEntity != null) {
-      if(request.getAuthPassword() != null && !request.getAuthPassword().isEmpty()){
-       BCryptPasswordEncoder encriptarContrasena = new BCryptPasswordEncoder();
-       String contrasenaEncriptada = encriptarContrasena.encode(request.getAuthPassword());
+      if (request.getAuthPassword() != null && !request.getAuthPassword().isEmpty()) {
+        BCryptPasswordEncoder encriptarContrasena = new BCryptPasswordEncoder();
+        String contrasenaEncriptada = encriptarContrasena.encode(request.getAuthPassword());
         authorityEntity.setAuthPassword(contrasenaEncriptada);
       }
       authorityEntity.setAuthUsername(request.getAuthUsername());

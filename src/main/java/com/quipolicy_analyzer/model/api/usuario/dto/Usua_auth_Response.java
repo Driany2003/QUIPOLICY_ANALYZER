@@ -1,5 +1,6 @@
 package com.quipolicy_analyzer.model.api.usuario.dto;
 
+import com.quipolicy_analyzer.model.entity.UsuarioEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,5 +1,7 @@
 package com.quipolicy_analyzer.expose.web;
 
+import com.quipolicy_analyzer.util.funciones.FxComunes;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,10 @@ public class WLoginController {
   }
 
   @RequestMapping(value = {"/quipolicy/menu/validar/consolidar-firmass"}, method = RequestMethod.GET)
-  public String welcome() {
+  public String welcome(ModelMap model, Authentication authentication) {
+    String username= authentication.getName();
+    model.addAttribute("username", username);
+    FxComunes.printJson("este es el usuario", username);
     return "consolidar-firmas";
   }
 
@@ -25,7 +30,6 @@ public class WLoginController {
   public String index() {
     return "index";
   }
-
   @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
   public String logout(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 

@@ -97,14 +97,14 @@
                 <h4>Inicia sesión</h4>
                 <p class="welcome-text">¡Te damos la bienvenida!</p>
                 <p>Ingresa tus datos para continuar</p>
-                <form>
+                <form action="login" method="post">
                     <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico" />
+                        <label  class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="username"  name="username" placeholder="Ingresa tu usuario" />
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" />
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña" />
                     </div>
                     <div class="mb-3">
                         <a href="#" class="text-danger">Olvidé mi contraseña</a>
