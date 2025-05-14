@@ -31,22 +31,6 @@ public class UsuarioImpl implements IUsuarioService {
   private final UsuarioRepository repository;
   private final AuthorityRepository usuarioAuthorityRepository;
 
-
-  /*LOGIN*/
-  @Override
-  public Usua_auth_Response findUsuarioByAuthUsername(String username , HttpServletRequest request) {
-    log.debug("Implements :: findByUsuUsername :: " + username);
-    Usua_auth_Response usuario = usuarioAuthorityRepository.findByUsername(username).map(this::convertEntityToResponse).orElse(null);
-    if(usuario != null) {
-      String rol = usuario.getAuthRoles();
-      request.getSession().setAttribute("usuSessionNivel", rol);
-    }
-    return usuario;
-  }
-
-
-  /*FIN LOGIN*/
-
   @Override
   public Usua_auth_Response create(Usua_auth_Request request) {
     log.info("Implements :: create :: {}", request);
@@ -181,12 +165,6 @@ public class UsuarioImpl implements IUsuarioService {
   }
 
   private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity) {
-    Usua_auth_Response response = new Usua_auth_Response();
-    BeanUtils.copyProperties(entity, response);
-    return response;
-  }
-
-  private Usua_auth_Response convertEntityToResponse(UsuarioAuthorityEntity entity) {
     Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;

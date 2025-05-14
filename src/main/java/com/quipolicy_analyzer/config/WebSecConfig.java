@@ -1,6 +1,6 @@
 package com.quipolicy_analyzer.config;
 
-import lombok.RequiredArgsConstructor;
+import com.quipolicy_analyzer.business.websec.CustomAuthenticationSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +21,9 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private UserDetailsService userDetailsService;
 
+  @Autowired
+  private CustomAuthenticationSuccessHandler successHandler;
+
   @Bean
   public DaoAuthenticationProvider authProvider() {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -39,9 +42,10 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
         .antMatchers("/login", "/index", "/resources/**").permitAll()
         .antMatchers("/quipolicy/menu/**").authenticated()
-        .and().formLogin()
+        .and()
+        .formLogin()
         .loginPage("/login")
-        .defaultSuccessUrl("/index")
+        .successHandler(successHandler)
         .failureUrl("/login?error=true")
         .permitAll()
         .and()
@@ -52,7 +56,6 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
         .and()
         .csrf().disable();
   }
-
 
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {

@@ -4,7 +4,7 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
 
-                <c:if test="${sessionScope.usuSessionNivel == 'TRABAJADOR'  || sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
+                <c:if test="${sessionScope.role == 'TRABAJADOR'  || sessionScope.role == 'ADMINISTRADOR'}">
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
                         <span class="hide-menu">Validar</span>
@@ -20,7 +20,7 @@
                     </li>
                 </c:if>
 
-                <c:if test="${sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
+                <c:if test="${sessionScope.role == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.usuSessionNivel == 'TRABAJADOR'  || sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
+                <c:if test="${sessionScope.role == 'TRABAJADOR'  || sessionScope.role == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
@@ -50,7 +50,7 @@
                     </li>
                 </c:if>
 
-                <c:if test="${sessionScope.usuSessionNivel == 'CLIENTE'  || sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
+                <c:if test="${sessionScope.role == 'CLIENTE'  || sessionScope.role == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
