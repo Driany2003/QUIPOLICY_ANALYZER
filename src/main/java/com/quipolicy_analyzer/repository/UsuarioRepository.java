@@ -16,9 +16,5 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>
   @Query(value = "SELECT u.usua_id AS usuaId, u.usua_nombre AS usuaNombre, u.usua_apellido AS usuaApellido, u.usua_correo AS usuaCorreo, " + "a.auth_roles AS authRoles, a.auth_username AS authUsername, a.auth_password AS authPassword, a.auth_is_active AS authIsActive, a.auth_fecha_registrado AS authFechaRegistrado " + " FROM T_USUARIO u " + "INNER JOIN T_AUTHORITY a ON u.usua_id = a.usua_id", nativeQuery = true)
   List<Map<String, Object>> findAllUsers();
 
-  @Query(value = "SELECT u.* FROM T_USUARIO u INNER JOIN T_AUTHORITY ua ON ua.usua_id = u.usua_id WHERE ua.auth_username = :authUsername", nativeQuery = true)
-  Optional<UsuarioEntity> findByAuthUsername(@Param("authUsername") String authUsername);
-
-
 
 }

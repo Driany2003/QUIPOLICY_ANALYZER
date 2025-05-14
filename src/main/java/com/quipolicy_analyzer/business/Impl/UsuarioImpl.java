@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.quipolicy_analyzer.util.funciones.FxComunes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,15 +30,20 @@ public class UsuarioImpl implements IUsuarioService {
 
   private final UsuarioRepository repository;
   private final AuthorityRepository usuarioAuthorityRepository;
-  private final BCryptPasswordEncoder passwordEncoder;
 
 
   /*LOGIN*/
   @Override
-  public Usua_auth_Response findUsuarioByAuthUsername(String username) {
+  public Usua_auth_Response findUsuarioByAuthUsername(String username , HttpServletRequest request) {
     log.debug("Implements :: findByUsuUsername :: " + username);
-    return repository.findByAuthUsername(username).map(this::convertEntityToResponse).orElse(null);
+    Usua_auth_Response usuario = usuarioAuthorityRepository.findByUsername(username).map(this::convertEntityToResponse).orElse(null);
+    if(usuario != null) {
+      String rol = usuario.getAuthRoles();
+      request.getSession().setAttribute("usuSessionNivel", rol);
+    }
+    return usuario;
   }
+
 
   /*FIN LOGIN*/
 
@@ -168,7 +174,6 @@ public class UsuarioImpl implements IUsuarioService {
   }
 
   private Usua_auth_Response convertToUsuarioDTO(Map<String, Object> map) {
-
     Timestamp timestamp = (Timestamp) map.get("authFechaRegistrado");
     LocalDateTime fechaRegistrado = timestamp.toLocalDateTime();
     String formattedFechaRegistrado = DateUtil.formatFechaRegistrado(fechaRegistrado);
@@ -176,6 +181,12 @@ public class UsuarioImpl implements IUsuarioService {
   }
 
   private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity) {
+    Usua_auth_Response response = new Usua_auth_Response();
+    BeanUtils.copyProperties(entity, response);
+    return response;
+  }
+
+  private Usua_auth_Response convertEntityToResponse(UsuarioAuthorityEntity entity) {
     Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;

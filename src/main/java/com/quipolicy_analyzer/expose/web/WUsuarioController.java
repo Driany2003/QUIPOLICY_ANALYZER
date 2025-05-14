@@ -21,7 +21,6 @@ public class WUsuarioController {
 
   @Autowired
   private IUsuarioService usuarioService;
-
   @PostMapping("/create")
     public ResponseEntity<Usua_auth_Response> create (@RequestBody Usua_auth_Request request){
     FxComunes.printJson("Datos del usuario request: ", request);

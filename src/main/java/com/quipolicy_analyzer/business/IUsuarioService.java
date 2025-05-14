@@ -6,11 +6,12 @@ import com.quipolicy_analyzer.model.api.usuario.UsuarioResponse;
 import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_Request;
 import com.quipolicy_analyzer.model.api.usuario.dto.Usua_auth_Response;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface IUsuarioService {
 
-  Usua_auth_Response findUsuarioByAuthUsername(String username);
+  Usua_auth_Response findUsuarioByAuthUsername(String username, HttpServletRequest request);
 
   Usua_auth_Response create (Usua_auth_Request request);
   Usua_auth_Response delete (Integer usuaId);

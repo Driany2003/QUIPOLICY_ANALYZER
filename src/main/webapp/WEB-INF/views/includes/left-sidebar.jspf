@@ -3,10 +3,13 @@
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
+
+                <c:if test="${sessionScope.usuSessionNivel == 'TRABAJADOR'  || sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
                         <span class="hide-menu">Validar</span>
                     </li>
+
 
                     <!-- consolidar firma -->
                     <li class="sidebar-item">
@@ -15,6 +18,9 @@
                             <span class="hide-menu">Consolidar Firma</span>
                         </a>
                     </li>
+                </c:if>
+
+                <c:if test="${sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
@@ -27,6 +33,8 @@
                             <span class="hide-menu">Usuarios</span>
                         </a>
                     </li>
+                </c:if>
+                <c:if test="${sessionScope.usuSessionNivel == 'TRABAJADOR'  || sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
@@ -40,20 +48,9 @@
                             <span class="hide-menu">Reportes/log</span>
                         </a>
                     </li>
+                </c:if>
 
-
-                <!-- Menú para Trabajador
-                    <li class="nav-small-cap">
-                        <i class="mdi mdi-dots-horizontal"></i>
-                        <span class="hide-menu">Validar</span>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/quipolicy/validar/consolidar-firmass">
-                            <i class="mdi mdi-calendar-check"></i> Consolidar Firma</a>
-                    </li>
-
-                    -->
+                <c:if test="${sessionScope.usuSessionNivel == 'CLIENTE'  || sessionScope.usuSessionNivel == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
                         <i class="mdi mdi-dots-horizontal"></i>
@@ -81,6 +78,7 @@
                             <span class="hide-menu">Historial de Análisis</span>
                         </a>
                     </li>
+                </c:if>
 
                 <!-- Sesión -->
                 <li class="nav-small-cap">
@@ -173,21 +171,3 @@
 </style>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggles = document.querySelectorAll('.toggle-collapse');
-
-        toggles.forEach((toggle) => {
-            toggle.addEventListener("click", function (event) {
-                const parent = toggle.parentElement;
-                const target = document.querySelector(toggle.getAttribute("data-target"));
-
-                // Alternar estado de colapso
-                target.classList.toggle("show");
-                parent.classList.toggle("open");
-
-                event.preventDefault();
-            });
-        });
-    });
-</script>
