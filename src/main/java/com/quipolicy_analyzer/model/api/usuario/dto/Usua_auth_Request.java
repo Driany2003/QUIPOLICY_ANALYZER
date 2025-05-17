@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Usua_auth_listar_Response {
+public class Usua_auth_Request {
 
   /*ATRIBUTOS DEL USUARIO*/
   private Integer usuaId;
@@ -21,4 +21,16 @@ public class Usua_auth_listar_Response {
   private String authPassword;
   private String authRoles;
   private Boolean authIsActive;
+
+  public Usua_auth_Request(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, String authUsername, String authPassword, String authRoles, Boolean authIsActive) {
+  this.usuaId = usuaId;
+  this.usuaNombre = usuaNombre;
+  this.usuaApellido = usuaApellido;
+  this.usuaCorreo = usuaCorreo;
+  this.authUsername = authUsername;
+  this.authPassword = authPassword;
+  this.authRoles = authRoles;
+  this.authIsActive = authIsActive;
+
+  }
 }

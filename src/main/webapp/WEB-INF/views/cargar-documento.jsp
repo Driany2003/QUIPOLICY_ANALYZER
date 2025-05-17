@@ -54,12 +54,6 @@
                                         Seleccione el documento de referencia para la comparación
                                     </p>
                                     <select id="referenceDoc" class="form-control">
-                                        <option>Seleccionar documento</option>
-                                        <option>Contrato Marco v2.3 (v2.3)</option>
-                                        <option>Formulario de Registro (v1.5)</option>
-                                        <option>Acuerdo de Confidencialidad (v3.0)</option>
-                                        <option>Política de Privacidad (v2.1)</option>
-                                        <option>Contrato de Servicios (v1.8)</option>
                                     </select>
                                 </div>
                             </div>
@@ -215,6 +209,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<script src="/static/web/dist/js/funciones/cargar-documentos.js"></script>
 
 <%@ include file="includes/all-jquery.jspf" %>
 </body>

@@ -38,6 +38,12 @@ public class DateUtil {
     return null;
   }
 
+  public static String formatFechaRegistrado(LocalDateTime fecha) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    return fecha.format(formatter);
+  }
+
+
   public static long getDiffenceInDays(Date date1, Date date2) {
     long dDays = 0;
     final long ONE_DAY = 60 * 60 * 24 * 1000;
