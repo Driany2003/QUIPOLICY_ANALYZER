@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/politicas")
 @Slf4j
 public class WPoliticasController {
 
@@ -19,7 +19,8 @@ public class WPoliticasController {
   private IPoliticaService politicaService;
 
   @GetMapping("/listar-politicas")
-  public Mono<ResponseEntity<List<PolizaResponse>>> obtenerPoliticas() {
+  public Mono<ResponseEntity<PolizaResponse>> obtenerPoliticas() {
+    System.out.println("llegue");
     return politicaService.listarPoliticas()
         .map(politicas -> ResponseEntity.ok(politicas))
         .defaultIfEmpty(ResponseEntity.notFound().build()); // Si no se obtiene ninguna política, retorna 404

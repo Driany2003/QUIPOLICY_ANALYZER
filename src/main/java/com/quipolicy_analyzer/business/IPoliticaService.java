@@ -8,7 +8,7 @@ import java.util.List;
 public interface IPoliticaService {
 
 
-  Mono<List<PolizaResponse>> listarPoliticas();
+  Mono<PolizaResponse> listarPoliticas();
   Mono<String> cargarPoliticas(Object data);
 
 }
