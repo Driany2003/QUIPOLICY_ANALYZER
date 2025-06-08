@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 public class UserDetailsImpl implements UserDetails {
 
   private static final long serialVersionUID = 1L;
+  private Integer usuId;
   private String userName;
   private String password;
   private String roles;
@@ -22,6 +22,7 @@ public class UserDetailsImpl implements UserDetails {
   private List<GrantedAuthority> authorities;
 
   public UserDetailsImpl(UsuarioAuthorityEntity user) {
+    this.usuId = user.getUsuaId();
     this.userName = user.getAuthUsername();
     this.password = user.getAuthPassword();
     this.roles = user.getAuthRoles();
@@ -30,6 +31,10 @@ public class UserDetailsImpl implements UserDetails {
   }
 
   public UserDetailsImpl() {
+  }
+
+  public Integer getUsuId() {
+    return usuId;
   }
 
   @Override

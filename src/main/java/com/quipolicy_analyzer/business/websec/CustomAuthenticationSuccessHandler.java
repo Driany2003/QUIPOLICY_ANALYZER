@@ -17,6 +17,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
     GrantedAuthority authority = authentication.getAuthorities().iterator().next(); //va a capturar el primer rol
     request.getSession().setAttribute("role",authority.getAuthority());
+
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+    Integer usuId = userDetails.getUsuId();
+    request.getSession().setAttribute("usuId", usuId);
+
     response.sendRedirect("/quipolicy/menu/validar/consolidar-firmass");
   }
 }

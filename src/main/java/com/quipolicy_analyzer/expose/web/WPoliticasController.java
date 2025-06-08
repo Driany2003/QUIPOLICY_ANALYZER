@@ -1,11 +1,16 @@
 package com.quipolicy_analyzer.expose.web;
 
 import com.quipolicy_analyzer.business.IPoliticaService;
+import com.quipolicy_analyzer.model.api.poliza.ListaPolizaResponse;
+import com.quipolicy_analyzer.model.api.poliza.ListaxIdPolizaResponse;
+import com.quipolicy_analyzer.model.api.poliza.PolizaActualizada;
 import com.quipolicy_analyzer.model.api.poliza.PolizaResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -20,21 +25,45 @@ public class WPoliticasController {
 
   @GetMapping("/listar-politicas")
   public Mono<ResponseEntity<PolizaResponse>> obtenerPoliticas() {
-    System.out.println("llegue");
+    log.info("Llegando a listar políticas");
     return politicaService.listarPoliticas()
-        .map(politicas -> ResponseEntity.ok(politicas))
-        .defaultIfEmpty(ResponseEntity.notFound().build()); // Si no se obtiene ninguna política, retorna 404
+        .map(polizaResponse -> ResponseEntity.ok(polizaResponse))
+        .defaultIfEmpty(ResponseEntity.notFound().build());
   }
 
-  @PostMapping("/cargar-politicas")
-  public Mono<ResponseEntity<String>> cargarPoliticas(@RequestBody Object data) {
-    return politicaService.cargarPoliticas(data)
-        .map(response -> ResponseEntity.ok(response))  // Si la respuesta es exitosa, devolvemos 200 OK
-        .defaultIfEmpty(ResponseEntity.notFound().build());  // Si ocurre un error, devolvemos 500
+  @PostMapping("/validar-politica")
+  public Mono<ResponseEntity<String>> validarPolitica(
+      @RequestPart("file") MultipartFile file,
+      @RequestParam("politicaSeleccionada") String politicaSeleccionada,
+      @RequestParam("usuId") Integer usuId) {
+
+    return politicaService.valiarPolitica(file, politicaSeleccionada, usuId)
+        .map(polizaResponse -> ResponseEntity.ok(polizaResponse))
+        .defaultIfEmpty(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en la carga"));
   }
 
+  @GetMapping("/listar-validaciones")
+  public Mono<ResponseEntity<List<ListaPolizaResponse>>> listarValidaciones() {
+    return politicaService.listarValidaciones()
+        .map(ListaPolizaResponse -> ResponseEntity.ok(ListaPolizaResponse))
+        .defaultIfEmpty(ResponseEntity.noContent().build());
+  }
 
+  @PostMapping("/listar-historial/{usuId}")
+  public Mono<ResponseEntity<List<ListaxIdPolizaResponse>>> listarHistorialxId(@PathVariable Integer usuId) {
+    return politicaService.listarHistorialxId(usuId)
+        .map(ListaxIdPolizaResponse -> ResponseEntity.ok(ListaxIdPolizaResponse))
+        .defaultIfEmpty(ResponseEntity.notFound().build());
+  }
 
+  @PutMapping("/actualizar-estado")
+  public Mono<ResponseEntity<PolizaActualizada>> actualizarEstado(
+      @RequestParam String id,
+      @RequestParam String usuId,
+      @RequestParam String status) {
 
-
+    return politicaService.actualizarEstado(id, usuId, status)
+        .map(PolizaActualizada -> ResponseEntity.ok(PolizaActualizada))
+        .defaultIfEmpty(ResponseEntity.noContent().build());
+  }
 }

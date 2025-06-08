@@ -1,8 +1,8 @@
 package com.quipolicy_analyzer.expose.web;
 
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,12 @@ public class WLoginController {
   }
 
   @RequestMapping(value = {"/quipolicy/menu/validar/consolidar-firmass"}, method = RequestMethod.GET)
-  public String welcome(Authentication authentication, HttpServletRequest request) {
+  public String welcome(Model model, Authentication authentication, HttpServletRequest request) {
+
+    Integer usuId = (Integer) request.getSession().getAttribute("usuId");
+    model.addAttribute("usuId", usuId);
+    System.out.println(usuId);
+
     return "consolidar-firmas";
   }
 

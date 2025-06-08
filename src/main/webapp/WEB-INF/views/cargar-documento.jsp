@@ -11,7 +11,7 @@
             <div class="card mt-3">
                 <div class="container py-5">
                     <div class="row">
-
+                        <input type="hidden" id="usuId" value="${usuId}">
                         <!-- Cargar Documento -->
                         <div class="col-md-6 mb-4">
                             <div class="card h-100 shadow-sm">
@@ -91,107 +91,7 @@
 <footer class="mt-auto bg-light text-center py-3">
     <%@ include file="includes/footer.jspf" %>
 </footer>
-
-<!-- PDF.js core + worker -->
-<!-- PDF.js core + worker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-<script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
-</script>
-
-<!-- Lógica completa de carga, extracción y muestra de nombre/tamaño -->
-<script>
-    // Referencias al DOM
-    const uploadBtn   = document.getElementById('uploadBtn'),
-        fileInput   = document.getElementById('fileInput'),
-        dropzone    = document.getElementById('dropzone'),
-        fileNameLbl = document.getElementById('fileName'),
-        fileSizeLbl = document.getElementById('fileSize');
-
-    // Función para formatear bytes
-    function formatBytes(bytes, decimals = 2) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024,
-            dm = decimals < 0 ? 0 : decimals,
-            sizes = ['Bytes','KB','MB','GB','TB'],
-            i = Math.floor(Math.log(bytes)/Math.log(k));
-        return parseFloat((bytes/Math.pow(k,i)).toFixed(dm)) + ' ' + sizes[i];
-    }
-
-    // Solo el botón abre el selector y detiene la propagación
-    uploadBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        fileInput.click();
-    });
-
-    // Clic en la zona (excepto el botón) abre también el selector
-    dropzone.addEventListener('click', () => fileInput.click());
-
-    // Efectos visuales de drag & drop
-    ['dragenter','dragover'].forEach(evt =>
-        dropzone.addEventListener(evt, e => {
-            e.preventDefault();
-            dropzone.classList.add('bg-light');
-        })
-    );
-    ['dragleave','drop'].forEach(evt =>
-        dropzone.addEventListener(evt, e => {
-            e.preventDefault();
-            dropzone.classList.remove('bg-light');
-        })
-    );
-
-    // Procesa el PDF: muestra nombre, tamaño y extrae texto
-    function processPDF(file) {
-        if (file.type !== 'application/pdf') {
-            return alert('❌ Solo se permiten archivos PDF.');
-        }
-
-        // Mostrar nombre y tamaño
-        fileNameLbl.textContent = file.name;
-        fileSizeLbl.textContent = formatBytes(file.size);
-
-        // Leer el archivo y extraer texto
-        const reader = new FileReader();
-        reader.onload = () => {
-            const data = new Uint8Array(reader.result);
-            pdfjsLib.getDocument(data).promise
-                .then(pdf => {
-                    const pages = [];
-                    for (let i = 1; i <= pdf.numPages; i++) {
-                        pages.push(
-                            pdf.getPage(i)
-                                .then(page => page.getTextContent())
-                                .then(ct => ct.items.map(it => it.str).join(' '))
-                        );
-                    }
-                    return Promise.all(pages);
-                })
-                .then(texts => {
-                    console.log('✅ Texto extraído:\n\n' + texts.join('\n\n'));
-                })
-                .catch(err => console.error('❌ Error extrayendo PDF:', err));
-        };
-        reader.readAsArrayBuffer(file);
-    }
-
-    // Evento drop
-    dropzone.addEventListener('drop', ev => {
-
-        ev.preventDefault();
-        dropzone.classList.remove('bg-light');
-        processPDF(ev.dataTransfer.files[0]);
-    });
-
-    // Evento selección de archivo
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length) {
-            processPDF(fileInput.files[0]);
-        }
-    });
-</script>
-
 
 <!-- customs -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
