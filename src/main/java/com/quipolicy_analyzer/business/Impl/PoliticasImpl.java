@@ -35,7 +35,7 @@ public class PoliticasImpl implements IPoliticaService {
   // Inicializa el WebClient solo una vez
   @PostConstruct
   public void init() {
-    this.webClient = webClientBuilder.baseUrl("https://5bff-38-25-29-232.ngrok-free.app").build(); // build sirve para hacer funcional ese objeto webClient para solicitudes HTTPS
+    this.webClient = webClientBuilder.baseUrl("https://fbd4-38-25-29-232.ngrok-free.app").build(); // build sirve para hacer funcional ese objeto webClient para solicitudes HTTPS
   }
 
 

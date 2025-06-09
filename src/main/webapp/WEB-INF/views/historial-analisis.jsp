@@ -14,7 +14,7 @@
         border: 1px solid;
     }
     .badge-aprobado   { background-color: #ECFDF3; color: #027A48; border-color: #D1FAE5; }
-    .badge-enrevision { background-color: #FFFAEB; color: #D27E00; border-color: #FDE68A; }
+    .badge-pendiente { background-color: #FFFAEB; color: #D27E00; border-color: #FDE68A; }
     .badge-rechazado  { background-color: #FEF3F2; color: #B42318; border-color: #FECACA; }
 
     /* Iconos de resultado */
@@ -87,12 +87,6 @@
                                 Listado de todos los documentos que ha enviado para análisis
                             </p>
                         </div>
-                        <select id="filterEstado" class="form-control w-auto">
-                            <option>Todos los estados</option>
-                            <option>Aprobado</option>
-                            <option>En Revisión</option>
-                            <option>Rechazado</option>
-                        </select>
                     </div>
 
                     <!-- Tabla -->
@@ -114,9 +108,9 @@
                         </table>
                     </div>
 
-                    <!-- Modal Aprobados (ahora sin modal-sm) -->
+                    <!-- Modal Aprobados-->
                     <div class="modal fade" id="detalleModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered"><!-- eliminamos modal-sm -->
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header border-0">
                                     <h5 class="modal-title">Detalles del Documento</h5>
@@ -150,7 +144,7 @@
 
                     <!-- Modal En Revisión -->
                     <div class="modal fade" id="detalleModalRevision" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header border-0 pb-1">
                                     <h5 class="modal-title">Detalles del Documento</h5>
@@ -204,7 +198,8 @@
                                         </div>
                                     </div>
                                     <small class="text-secondary">Motivo del rechazo</small>
-                                    <div id="mdrej-reason" class="rechazo-box"></div>
+                                    <div id="mdrej-reason" class="rechazo-box">
+                                    </div>
                                     <small class="text-secondary mt-3 d-block">Diferencias encontradas</small>
                                     <div id="mdrej-list" class="revision-list">
                                     </div>
@@ -247,78 +242,6 @@
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    $(function(){
-        $('.ver-detalle').on('click', function(e){
-            e.preventDefault();
-
-            var $tr     = $(this).closest('tr'),
-                status  = $tr.data('status'),
-                diffs   = $tr.data('diffs')   || [],
-                reason  = $tr.data('reason')  || '';
-
-            if (status === 'Aprobado') {
-                // Modal Aprobados
-                $('#md-doc').text( $tr.data('name') );
-                $('#md-ref').text( $tr.data('ref') );
-                $('#md-date').text( $tr.data('date') );
-                $('#md-status').text( status );
-                $('#md-download').attr('href', '/descargar?file=' + encodeURIComponent($tr.data('name')));
-                $('#detalleModal').modal('show');
-
-            } else if (status === 'En Revisión') {
-                // Modal En Revisión
-                $('#mdr-doc').text( $tr.data('name') );
-                $('#mdr-ref').text( $tr.data('ref') );
-                $('#mdr-date').text( $tr.data('date') );
-                $('#mdr-status').text( status );
-
-                var $list = $('#mdr-list').empty();
-                diffs.forEach(function(d){
-                    var parts = d.diff.split(' vs ');
-                    $list.append(
-                        '<div class="revision-item">'+
-                        '<div class="details">'+
-                        '<strong>'+ d.clause +'</strong><br>'+
-                        '<small>'+
-                        '<span class="text-danger">'+ parts[0] +'</span> vs '+
-                        '<span class="text-success">'+ parts[1] +'</span>'+
-                        '</small>'+
-                        '</div>'+
-                        '<div class="page-badge">Pág. '+ d.page +'</div>'+
-                        '</div>'
-                    );
-                });
-
-                $('#detalleModalRevision').modal('show');
-
-            } if (status === 'Rechazado') {
-                $('#mdrej-doc').text( $tr.data('name') );
-                $('#mdrej-ref').text( $tr.data('ref') );
-                $('#mdrej-date').text( $tr.data('date') );
-                $('#mdrej-status').text( status );
-                $('#mdrej-reason').text( reason );
-
-                var $listR = $('#mdrej-list').empty();
-                diffs.forEach(function(d){
-                    if (d.diff) {
-                        $listR.append(
-                            '<div class="revision-item">'+
-                            '<div class="details">'+
-                            '<strong>'+ d.clause +'</strong><br>'+
-                            '<small>'+ d.diff +'</small>' +
-                            '</div>'+
-                            '<div class="page-badge">Pág. '+ d.page +'</div>'+
-                            '</div>'
-                        );
-                    }
-                });
-
-                $('#detalleModalRechazado').modal('show');
-            }
-        });
-    });
-</script>
 
 <!-- import -->
 <%@ include file="includes/all-jquery.jspf" %>

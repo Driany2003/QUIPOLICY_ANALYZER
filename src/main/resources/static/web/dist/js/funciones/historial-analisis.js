@@ -25,13 +25,24 @@ $(document).ready(function () {
     function llenarTabla(data) {
         $("#tableBody").empty();
 
+        if (!data || data.length === 0) {
+            $("#tableBody").append(`
+            <tr>
+                <td colspan="6" class="text-center py-4 text-muted">
+                    <i class="fas fa-info-circle mr-2"></i> No se encontraron documentos analizados para mostrar.
+                </td>
+            </tr>
+        `);
+            return;
+        }
+
         data.forEach(function (item) {
             var row = `
             <tr data-id="${item.id}" data-status="${item.status}" data-diffs='${JSON.stringify(item.comparacion.diferencias)}' data-reason="${item.rechazo_motivo || ''}">
                 <td>${item.nombre}</td>
                 <td>${item.comparacion.diferencias[0]?.documento || ''}</td>
                 <td>${item.fecha_proceso}</td>
-                <td><span class="historial-badge ${item.status === 'aprobado' ? 'badge-aprobado' : item.status === 'rechazado' ? 'badge-rechazado' : 'badge-enrevision'}">${item.status}</span></td>
+                <td><span class="historial-badge ${item.status === 'aprobado' ? 'badge-aprobado' : item.status === 'rechazado' ? 'badge-rechazado' : 'badge-pendiente'}">${item.status}</span></td>
                 <td><i class="fas fa-check-circle ${item.status === 'aprobado' ? 'text-validado' : 'text-diferencias'}"></i><span class="${item.status === 'aprobado' ? 'text-validado' : 'text-diferencias'}">${item.status === 'aprobado' ? 'Validado' : item.comparacion.diferencias.length + ' diferencias'}</span></td>
                 <td class="text-center">
                     <button class="btn btn-sm btn-link text-secondary verDetalles" data-id="${item.id}">Ver detalles</button>
@@ -54,36 +65,6 @@ $(document).ready(function () {
             return item.id === detalleId;
         });
 
-        // Crear el HTML con los detalles
-        var detalles = `
-        <h3>Detalles del Documento</h3>
-        <p><strong>Nombre:</strong> ${item.nombre}</p>
-        <p><strong>Fecha de Proceso:</strong> ${item.fecha_proceso}</p>
-        <p><strong>Estado:</strong> ${item.status}</p>
-        <p><strong>Total Fragmentos:</strong> ${item.resumen.total_fragmentos}</p>
-        <p><strong>Diferencias Detectadas:</strong> ${item.resumen.diferencias_detectadas}</p>
-        <p><strong>Criticas:</strong> ${item.resumen.criticas}</p>
-        <h4>Diferencias</h4>
-        <ul>
-            ${item.comparacion.diferencias.map(function (diferencia) {
-            // Aplicamos el cambio solo si el estado es 'rechazado'
-            if (item.status === 'rechazado') {
-                // Verificamos si 'evidencia' está definida, de lo contrario mostramos 'N/A'
-                var evidencia = diferencia.evidencia || 'N/A';
-                return `
-                        <li>
-                            <strong>${diferencia.resultado}</strong>: ${diferencia.descripcion} (Gravedad: ${diferencia.gravedad})
-                            <br><strong>Evidencia:</strong> ${evidencia}
-                        </li>
-                    `;
-            } else {
-                // Si no es rechazado, simplemente mostramos las diferencias sin 'evidencia'
-                return `<li><strong>${diferencia.resultado}</strong>: ${diferencia.descripcion} (Gravedad: ${diferencia.gravedad})</li>`;
-            }
-        }).join('')}
-        </ul>
-    `;
-
         // Mostrar el modal adecuado basado en el estado del documento
         if (item.status === 'aprobado') {
             $('#md-doc').text(item.nombre);
@@ -92,41 +73,41 @@ $(document).ready(function () {
             $('#md-status').text(item.status);
             $('#md-download').attr('href', '/descargar?file=' + encodeURIComponent(item.nombre));
             $('#detalleModal').modal('show');
-        } else if (item.status === 'en_revision') {
+        } else if (item.status === 'pendiente') {
             $('#mdr-doc').text(item.nombre);
             $('#mdr-ref').text(item.comparacion.diferencias[0]?.documento || 'N/A');
             $('#mdr-date').text(item.fecha_proceso);
             $('#mdr-status').text(item.status);
-            var $list = $('#mdr-list').empty();
-            item.comparacion.diferencias.forEach(function (diff) {
-                $list.append(`
-                <div class="revision-item">
-                    <div class="details">
-                        <strong>${diff.clause}</strong>
-                        <small>${diff.diff}</small>
+            var $listR = $('#mdr-list').empty();
+            item.comparacion.diferencias.forEach(function (diferencia) {
+                var evidenciaText = diferencia.evidencia ? diferencia.evidencia : 'No hay evidencia disponible.';
+                $listR.append(`
+                    <div class="revision-item">
+                        <div class="details">
+                            <strong>${diferencia.descripcion}</strong><br> <small>${evidenciaText}</small> </div>
+                        <div class="page-badge">Pág. ${diferencia.page || 'N/A'}</div>
                     </div>
-                    <div class="page-badge">Pág. ${diff.page}</div>
-                </div>
-            `);
+                `);
             });
             $('#detalleModalRevision').modal('show');
         } else if (item.status === 'rechazado') {
+            var descripcionRechazo = " Múltiples cláusulas modificadas que alteran significativamente los términos legales. Se requiere revisión por el departamento legal.\n"
             $('#mdrej-doc').text(item.nombre);
             $('#mdrej-ref').text(item.comparacion.diferencias[0]?.documento || 'N/A');
             $('#mdrej-date').text(item.fecha_proceso);
             $('#mdrej-status').text(item.status);
-            $('#mdrej-reason').text(item.rechazo_motivo);  // Mostrar el motivo de rechazo
+            $('#mdrej-reason').text(descripcionRechazo);
             var $listR = $('#mdrej-list').empty();
-            item.comparacion.diferencias.forEach(function (diff) {
+            item.comparacion.diferencias.forEach(function (diferencia) { // Renamed 'diff' to 'diferencia' for clarity
+                var evidenciaText = diferencia.evidencia ? diferencia.evidencia : 'No hay evidencia disponible.';
+
                 $listR.append(`
-                <div class="revision-item">
-                    <div class="details">
-                        <strong>${diff.clause}</strong>
-                        <small>${diff.diff}</small> 
+                    <div class="revision-item">
+                        <div class="details">
+                            <strong>${diferencia.descripcion}</strong><br> <small>${evidenciaText}</small> </div>
+                        <div class="page-badge">Pág. ${diferencia.page || 'N/A'}</div>
                     </div>
-                    <div class="page-badge">Pág. ${diff.page}</div>
-                </div>
-            `);
+                `);
             });
             $('#detalleModalRechazado').modal('show');
         }
