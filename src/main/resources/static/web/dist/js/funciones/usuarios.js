@@ -14,6 +14,7 @@ $(document).ready(function () {
                         <td>${usuario.usuaNombre} ${usuario.usuaApellido}</td>
                         <td>${usuario.authUsername}</td>
                         <td>${usuario.usuaCorreo}</td>
+                        <td>${usuario.usuaTelefono}</td>
                         <td>
                             <span class="badge 
                                 ${usuario.authRoles === 'ADMINISTRADOR' ? 'badge-rol-admin' :
@@ -64,7 +65,7 @@ $(document).ready(function () {
         $('#createUserModal').modal('show');
 
         // Verifica si los campos están completos
-        if ($('#usuaNombre').val() === "" || $('#usuaApellido').val() === "" || $('#usuaCorreo').val() === "" || $('#authUsername').val() === "" || $('#authPassword').val() === "") {
+        if ($('#usuaNombre').val() === "" || $('#usuaApellido').val() === "" || $('#usuaCorreo').val() === "" || $('#usuaTelefono').val() === "" || $('#authUsername').val() === "" || $('#authPassword').val() === "") {
             toastr.error("Por favor complete todos los campos.");
             return;
         }
@@ -78,6 +79,7 @@ $(document).ready(function () {
             usuaNombre: $('#usuaNombre').val(),
             usuaApellido: $('#usuaApellido').val(),
             usuaCorreo: $('#usuaCorreo').val(),
+            usuaTelefono: $('#usuaTelefono').val(),
             authUsername: $('#authUsername').val(),
             authPassword: $('#authPassword').val(),
             authRoles: $('#authRoles').val(),
@@ -110,6 +112,7 @@ $(document).ready(function () {
                 $('#usuaNombreUpadte').val(usuario.usuaNombre);
                 $('#usuaApellidoUpadte').val(usuario.usuaApellido);
                 $('#usuaCorreoUpdate').val(usuario.usuaCorreo);
+                $('#usuaTelefonoUpdate').val(usuario.usuaTelefono);
                 $('#authUsernameUpdate').val(usuario.authUsername);
                 $('#authRolesUpdate').val(usuario.authRoles);
                 $('#authIsActiveUpdate').val(usuario.authIsActive.toString());
@@ -160,6 +163,7 @@ $(document).ready(function () {
             usuaNombre: $('#usuaNombreUpadte').val(),
             usuaApellido: $('#usuaApellidoUpadte').val(),
             usuaCorreo: $('#usuaCorreoUpdate').val(),
+            usuaTelefono: $('#usuaTelefonoUpdate').val(),
             authUsername: $('#authUsernameUpdate').val(),
             authPassword: $('#authPasswordUpdate').val(),
             authRoles: $('#authRolesUpdate').val(),

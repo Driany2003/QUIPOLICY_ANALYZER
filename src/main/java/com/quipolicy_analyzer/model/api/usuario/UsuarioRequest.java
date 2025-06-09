@@ -13,6 +13,7 @@ public class UsuarioRequest {
   private String usuaNombre;
   private String usuaApellido;
   private String usuaCorreo;
+  private String usuaTelefono;
   private LocalDateTime usuaFechaRegistrado;
   private LocalDateTime usuaFechaModificado;
 

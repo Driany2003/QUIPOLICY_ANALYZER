@@ -55,19 +55,22 @@ public class PoliticasImpl implements IPoliticaService {
 
   @Override
   public Mono<List<ListaxIdPolizaResponse>> listarHistorialxId(Integer usuId) {
-     return webClient.post()
-        .uri("/listar-todo/usuario")
+    return webClient.get()
+        .uri(uriBuilder -> uriBuilder.path("/listar-todo/usuario")
+            .queryParam("usu_id", usuId)
+            .build())
         .header("X-API-TOKEN", "secreto-super-seguro")
-        .body(BodyInserters.fromFormData("usu_id", usuId.toString()))  // Aquí va en form-data
         .retrieve()
         .bodyToMono(ListaxIdPolizaResponse[].class)
         .map(Arrays::asList)
-        .doOnSuccess(response -> FxComunes.printJson("Políticas obtenidas: Impl ", response))
+        .doOnSuccess(response ->{
+        })
         .onErrorResume(e -> {
           FxComunes.printJson("Error al obtener políticas: ", e.getMessage());
           return Mono.empty();
         });
   }
+
 
 
   @Override

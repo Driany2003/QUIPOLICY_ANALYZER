@@ -13,7 +13,7 @@
 
                     <!-- consolidar firma -->
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/quipolicy/menu/validar/consolidar-firmas">
+                        <a class="sidebar-link" href="/quipolicy/menu/consolidar-firmas">
                             <i class="mdi mdi-account-circle"></i>
                             <span class="hide-menu">Consolidar Firma</span>
                         </a>
@@ -59,7 +59,7 @@
 
                     <!-- consolidar firma -->
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/quipolicy/menu/nuevo/cargar-documento">
+                        <a class="sidebar-link" href="/quipolicy/menu/cargar-documento">
                             <i class="mdi mdi-account-circle"></i>
                             <span class="hide-menu">Cargar Documento</span>
                         </a>
@@ -73,7 +73,7 @@
 
                     <!-- consolidar firma -->
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/quipolicy/menu/ver/historial-analisis">
+                        <a class="sidebar-link" href="/quipolicy/menu/historial-analisis">
                             <i class="mdi mdi-account-circle"></i>
                             <span class="hide-menu">Historial de Análisis</span>
                         </a>

@@ -5,6 +5,7 @@ import com.quipolicy_analyzer.model.api.poliza.ListaPolizaResponse;
 import com.quipolicy_analyzer.model.api.poliza.ListaxIdPolizaResponse;
 import com.quipolicy_analyzer.model.api.poliza.PolizaActualizada;
 import com.quipolicy_analyzer.model.api.poliza.PolizaResponse;
+import com.quipolicy_analyzer.util.funciones.FxComunes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,10 +50,10 @@ public class WPoliticasController {
         .defaultIfEmpty(ResponseEntity.noContent().build());
   }
 
-  @PostMapping("/listar-historial/{usuId}")
+  @GetMapping("/listar-historial/{usuId}")
   public Mono<ResponseEntity<List<ListaxIdPolizaResponse>>> listarHistorialxId(@PathVariable Integer usuId) {
     return politicaService.listarHistorialxId(usuId)
-        .map(ListaxIdPolizaResponse -> ResponseEntity.ok(ListaxIdPolizaResponse))
+        .map(listResponse -> ResponseEntity.ok(listResponse))
         .defaultIfEmpty(ResponseEntity.notFound().build());
   }
 

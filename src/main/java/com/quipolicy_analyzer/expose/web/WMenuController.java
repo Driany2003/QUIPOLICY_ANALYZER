@@ -14,17 +14,17 @@ public class WMenuController {
     return "usuarios";
   }
 
-  @RequestMapping(value = {"/validar/consolidar-firmas"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/consolidar-firmas"}, method = RequestMethod.GET)
   public String menuConsolidarFirmas() {
     return "consolidar-firmas";
   }
 
-  @RequestMapping(value = {"/nuevo/cargar-documento"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/cargar-documento"}, method = RequestMethod.GET)
   public String menuCargarDocumento() {
     return "cargar-documento";
   }
 
-  @RequestMapping(value = {"/ver/historial-analisis"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/historial-analisis"}, method = RequestMethod.GET)
   public String menuHistorialAnalisis() {
     return "historial-analisis";
   }

@@ -84,6 +84,7 @@
                             <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Usuario</th>
+                                <th scope="col">Telefono</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Rol</th>
                                 <th scope="col">Estado</th>
@@ -128,6 +129,10 @@
                         <input type="email" class="form-control" id="usuaCorreo" required>
                     </div>
                     <div class="mb-3">
+                        <label for="usuaTelefono" class="form-label">Telefono</label>
+                        <input type="number" class="form-control" id="usuaTelefono" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="authUsername" class="form-label">Nombre de Usuario</label>
                         <input type="text" class="form-control" id="authUsername" required>
                     </div>
@@ -143,6 +148,7 @@
                         <label for="authRoles" class="form-label">Rol</label>
                         <select class="form-select" id="authRoles">
                             <option value="ADMINISTRADOR">Administrador</option>
+                            <option value="TRABAJADOR">Trabajador</option>
                             <option value="CLIENTE">Cliente</option>
                         </select>
                     </div>
@@ -183,6 +189,10 @@
                         <input type="email" class="form-control" id="usuaCorreoUpdate" required>
                     </div>
                     <div class="mb-3">
+                        <label for="usuaTelefonoUpdate" class="form-label">Telefono</label>
+                        <input type="number" class="form-control" id="usuaTelefonoUpdate" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="authUsernameUpdate" class="form-label">Nombre de Usuario</label>
                         <input type="text" class="form-control" id="authUsernameUpdate" required>
                     </div>
@@ -199,6 +209,7 @@
                         <select class="form-select" id="authRolesUpdate">
                             <option value="ADMINISTRADOR">Administrador</option>
                             <option value="TRABAJADOR">Trabajador</option>
+                            <option value="CLIENTE">Cliente</option>
                         </select>
                     </div>
                     <div class="mb-3">

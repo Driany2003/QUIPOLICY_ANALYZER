@@ -18,6 +18,7 @@ public class Usua_auth_Response {
   private String usuaNombre;
   private String usuaApellido;
   private String usuaCorreo;
+  private String usuaTelefono;
 
   /*ATRIBUTOS DEL AUTHORITY*/
   private Integer authId;
@@ -27,11 +28,12 @@ public class Usua_auth_Response {
   private Boolean authIsActive;
   private String authFechaRegistrado;
 
-  public Usua_auth_Response(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, String authUsername, String authPassword, String authRoles, Boolean authIsActive,String authFechaRegistrado) {
+  public Usua_auth_Response(Integer usuaId, String usuaNombre, String usuaApellido, String usuaCorreo, String usuaTelefono, String authUsername, String authPassword, String authRoles, Boolean authIsActive,String authFechaRegistrado) {
   this.usuaId = usuaId;
   this.usuaNombre = usuaNombre;
   this.usuaApellido = usuaApellido;
   this.usuaCorreo = usuaCorreo;
+  this.usuaTelefono = usuaTelefono;
   this.authUsername = authUsername;
   this.authPassword = authPassword;
   this.authRoles = authRoles;

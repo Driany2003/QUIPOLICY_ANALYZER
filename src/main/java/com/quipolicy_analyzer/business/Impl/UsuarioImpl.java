@@ -88,6 +88,7 @@ public class UsuarioImpl implements IUsuarioService {
       response.setUsuaNombre(usuarioEntity.getUsuaNombre());
       response.setUsuaApellido(usuarioEntity.getUsuaApellido());
       response.setUsuaCorreo(usuarioEntity.getUsuaCorreo());
+      response.setUsuaTelefono(usuarioEntity.getUsuaTelefono());
 
       Optional<UsuarioAuthorityEntity> authorityResponse = usuarioAuthorityRepository.findById(usuarioEntity.getUsuaId());
 
@@ -116,12 +117,13 @@ public class UsuarioImpl implements IUsuarioService {
     UsuarioEntity usuarioExistente = repository.findById(request.getUsuaId()).orElse(null);
     if (usuarioExistente == null) {
       log.info("Usuario no encontrado con ID -> {}", request.getUsuaId());
-      return new Usua_auth_Response(); // Retorna una respuesta vacía si no se encuentra el usuario
+      return new Usua_auth_Response();
     }
 
     usuarioExistente.setUsuaNombre(request.getUsuaNombre());
     usuarioExistente.setUsuaApellido(request.getUsuaApellido());
     usuarioExistente.setUsuaCorreo(request.getUsuaCorreo());
+    usuarioExistente.setUsuaTelefono(request.getUsuaTelefono());
     usuarioExistente.setUsuaFechaModificado(LocalDateTime.now());
 
     UsuarioEntity usuarioActualizado = repository.save(usuarioExistente);
@@ -140,7 +142,6 @@ public class UsuarioImpl implements IUsuarioService {
       authorityEntity.setAuthIsActive(request.getAuthIsActive());
       authorityEntity.setAuthFechaModificado(LocalDateTime.now());
 
-      // Guardar los cambios en la entidad UsuarioAuthorityEntity
       usuarioAuthorityRepository.save(authorityEntity);
       log.info("Authority actualizada para el usuario con ID -> {}", usuarioExistente.getUsuaId());
     } else {
@@ -161,7 +162,7 @@ public class UsuarioImpl implements IUsuarioService {
     Timestamp timestamp = (Timestamp) map.get("authFechaRegistrado");
     LocalDateTime fechaRegistrado = timestamp.toLocalDateTime();
     String formattedFechaRegistrado = DateUtil.formatFechaRegistrado(fechaRegistrado);
-    return new Usua_auth_Response((Integer) map.get("usuaId"), (String) map.get("usuaNombre"), (String) map.get("usuaApellido"), (String) map.get("usuaCorreo"), (String) map.get("authUsername"), (String) map.get("authPassword"), (String) map.get("authRoles"), (Boolean) map.get("authIsActive"), formattedFechaRegistrado);
+    return new Usua_auth_Response((Integer) map.get("usuaId"), (String) map.get("usuaNombre"), (String) map.get("usuaApellido"), (String) map.get("usuaTelefono"), (String) map.get("usuaCorreo"), (String) map.get("authUsername"), (String) map.get("authPassword"), (String) map.get("authRoles"), (Boolean) map.get("authIsActive"), formattedFechaRegistrado);
   }
 
   private Usua_auth_Response convertEntityToResponse(UsuarioEntity entity) {
@@ -176,10 +177,12 @@ public class UsuarioImpl implements IUsuarioService {
     return entity;
   }
 
+  /*
   private Usua_auth_Response convertEntityToResponseDTO(UsuarioEntity entity) {
     Usua_auth_Response response = new Usua_auth_Response();
     BeanUtils.copyProperties(entity, response);
     return response;
   }
+  */
 
 }

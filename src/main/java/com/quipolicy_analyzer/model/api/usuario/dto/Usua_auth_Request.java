@@ -14,6 +14,7 @@ public class Usua_auth_Request {
   private String usuaNombre;
   private String usuaApellido;
   private String usuaCorreo;
+  private String usuaTelefono;
 
   /*ATRIBUTOS DEL AUTHORITY*/
   private Integer authId;

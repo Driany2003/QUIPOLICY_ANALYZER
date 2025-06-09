@@ -24,6 +24,9 @@ public class UsuarioEntity {
   @Column(name = "usua_correo")
   private String usuaCorreo;
 
+  @Column(name = "usua_telefono")
+  private String usuaTelefono;
+
   @Column(name = "usua_fecha_registrado")
   private LocalDateTime usuaFechaRegistrado;
 
