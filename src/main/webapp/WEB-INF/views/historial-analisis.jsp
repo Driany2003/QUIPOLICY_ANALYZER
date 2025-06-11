@@ -82,7 +82,7 @@
                     <!-- Encabezado -->
                     <div class="d-flex justify-content-between align-items-start mb-4">
                         <div>
-                            <h2 class="h4 mb-1">Historial de Análisis de Documentos</h2>
+                            <h2 class="h4 mb-1"> Historial de Análisis de Documentos</h2>
                             <p class="text-secondary small mb-3">
                                 Listado de todos los documentos que ha enviado para análisis
                             </p>
