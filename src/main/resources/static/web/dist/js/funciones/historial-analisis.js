@@ -37,20 +37,25 @@ $(document).ready(function () {
         }
 
         data.forEach(function (item) {
+            var documento = item.comparacion.diferencias && item.comparacion.diferencias.length > 0
+                ? item.comparacion.diferencias[0]?.documento
+                : item.comparacion.cumplimientos[0]?.documento || 'NA';
+
             var row = `
-            <tr data-id="${item.id}" data-status="${item.status}" data-diffs='${JSON.stringify(item.comparacion.diferencias)}' data-reason="${item.rechazo_motivo || ''}">
-                <td>${item.nombre}</td>
-                <td>${item.comparacion.diferencias[0]?.documento || ''}</td>
-                <td>${item.fecha_proceso}</td>
-                <td><span class="historial-badge ${item.status === 'aprobado' ? 'badge-aprobado' : item.status === 'rechazado' ? 'badge-rechazado' : 'badge-pendiente'}">${item.status}</span></td>
-                <td><i class="fas fa-check-circle ${item.status === 'aprobado' ? 'text-validado' : 'text-diferencias'}"></i><span class="${item.status === 'aprobado' ? 'text-validado' : 'text-diferencias'}">${item.status === 'aprobado' ? 'Validado' : item.comparacion.diferencias.length + ' diferencias'}</span></td>
-                <td class="text-center">
-                    <button class="btn btn-sm btn-link text-secondary verDetalles" data-id="${item.id}">Ver detalles</button>
-                </td>
-            </tr>
-        `;
+        <tr data-id="${item.id}" data-status="${item.status}" data-diffs='${JSON.stringify(item.comparacion.diferencias)}' data-reason="${item.rechazo_motivo || ''}">
+            <td>${item.nombre}</td>
+            <td>${documento}</td> 
+            <td>${item.fecha_proceso}</td>
+            <td><span class="historial-badge ${item.status === 'aprobado' ? 'badge-aprobado' : item.status === 'rechazado' ? 'badge-rechazado' : 'badge-pendiente'}">${item.status}</span></td>
+            <td><i class="fas fa-check-circle ${item.status === 'aprobado' ? 'text-validado' : 'text-diferencias'}"></i><span class="${item.status === 'aprobado' ? 'text-validado' : 'text-diferencias'}">${item.status === 'aprobado' ? 'Validado' : item.comparacion.diferencias.length + ' diferencias'}</span></td>
+            <td class="text-center">
+                <button class="btn btn-sm btn-link text-secondary verDetalles" data-id="${item.id}">Ver detalles</button>
+            </td>
+        </tr>
+    `;
             $("#tableBody").append(row);
         });
+
 
         // Asociar el evento 'click' a los botones de 'Ver detalles'
         $('.verDetalles').click(function (event) {
@@ -68,14 +73,14 @@ $(document).ready(function () {
         // Mostrar el modal adecuado basado en el estado del documento
         if (item.status === 'aprobado') {
             $('#md-doc').text(item.nombre);
-            $('#md-ref').text(item.comparacion.diferencias[0]?.documento || 'N/A');
+            $('#md-ref').text(item.comparacion.cumplimientos[0]?.documento || 'N/A');
             $('#md-date').text(item.fecha_proceso);
             $('#md-status').text(item.status);
             $('#md-download').attr('href', '/descargar?file=' + encodeURIComponent(item.nombre));
             $('#detalleModal').modal('show');
         } else if (item.status === 'pendiente') {
             $('#mdr-doc').text(item.nombre);
-            $('#mdr-ref').text(item.comparacion.diferencias[0]?.documento || 'N/A');
+            $('#mdr-ref').text(item.comparacion.diferencias[0]?.documento || item.comparacion.cumplimientos[0]?.documento || "NA");
             $('#mdr-date').text(item.fecha_proceso);
             $('#mdr-status').text(item.status);
             var $listR = $('#mdr-list').empty();
@@ -93,7 +98,7 @@ $(document).ready(function () {
         } else if (item.status === 'rechazado') {
             var descripcionRechazo = " Múltiples cláusulas modificadas que alteran significativamente los términos legales. Se requiere revisión por el departamento legal.\n"
             $('#mdrej-doc').text(item.nombre);
-            $('#mdrej-ref').text(item.comparacion.diferencias[0]?.documento || 'N/A');
+            $('#mdrej-ref').text(item.comparacion.diferencias[0]?.documento);
             $('#mdrej-date').text(item.fecha_proceso);
             $('#mdrej-status').text(item.status);
             $('#mdrej-reason').text(descripcionRechazo);

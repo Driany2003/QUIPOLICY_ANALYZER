@@ -35,9 +35,40 @@ public class PoliticasImpl implements IPoliticaService {
   // Inicializa el WebClient solo una vez
   @PostConstruct
   public void init() {
-    this.webClient = webClientBuilder.baseUrl("https://fbd4-38-25-29-232.ngrok-free.app").build(); // build sirve para hacer funcional ese objeto webClient para solicitudes HTTPS
+    this.webClient = webClientBuilder.baseUrl("https://d554-38-25-29-232.ngrok-free.app").build(); // build sirve para hacer funcional ese objeto webClient para solicitudes HTTPS
   }
 
+  @Override
+  public Mono<String> agregarNuevaPolitica(MultipartFile multipartFile) {
+    try {
+      File tempFile = File.createTempFile("upload-", ".pdf");
+      multipartFile.transferTo(tempFile);
+      MultipartBodyBuilder builder = new MultipartBodyBuilder();
+      builder.part("file", new FileSystemResource(tempFile))
+          .header("Content-Disposition", "form-data; name=file; filename=" + multipartFile.getOriginalFilename());
+
+      // Enviar el archivo al backend mediante WebClient
+      return webClient.post()
+          .uri("/cargar-politica")
+          .header("X-API-TOKEN", "secreto-super-seguro")
+          .contentType(MediaType.MULTIPART_FORM_DATA)
+          .body(BodyInserters.fromMultipartData(builder.build()))
+          .retrieve()
+          .bodyToMono(String.class)
+          .doFinally(signal -> {
+            if (tempFile.exists()) {
+              tempFile.delete();
+            }
+          })
+          .onErrorResume(e -> {
+            FxComunes.printJson("Error agregando política: ", e.getMessage());
+            return Mono.just("Error al agregar política.");
+          });
+
+    } catch (IOException e) {
+      return Mono.just("Error creando archivo temporal: " + e.getMessage());
+    }
+  }
 
   @Override
   public Mono<PolizaResponse> listarPoliticas() {

@@ -59,7 +59,7 @@ $(document).ready(function () {
         const documentoAnalizado = item.nombre;
         let documentoReferencia = "No disponible";
         if (item.comparacion && item.comparacion.diferencias && item.comparacion.diferencias.length > 0) {
-            documentoReferencia = item.comparacion.diferencias[0].documento || documentoReferencia;
+            documentoReferencia = item.comparacion.diferencias[0].documento || item.comparacion.cumplimientos[0]?.documento ||documentoReferencia;
         }
 
         // Resultado basado en status

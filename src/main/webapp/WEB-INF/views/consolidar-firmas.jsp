@@ -59,14 +59,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Notificación / Resumen del Reporte (afuera del card) -->
-                            <div class="alert alert-success mt-3" role="alert">
-                                <h5 class="alert-heading mb-2"><i class="icon-check"></i> Resumen del Reporte</h5>
-                                <p class="mb-0">
-                                    El documento "Acuerdo de Confidencialidad.docx" fue validado exitosamente el 01/04/2024, cumpliendo todos los criterios establecidos. No se encontraron diferencias significativas.
-                                </p>
-                            </div>
                         </div>
                     </div>
             </div>

@@ -18,4 +18,5 @@ public interface IPoliticaService {
   Mono<List<ListaPolizaResponse>> listarValidaciones();
   Mono<List<ListaxIdPolizaResponse>> listarHistorialxId(Integer usuId);
   Mono<PolizaActualizada> actualizarEstado(String id, String usuId, String status);
+  Mono<String> agregarNuevaPolitica(MultipartFile nuevoArchivo);
 }

@@ -204,11 +204,6 @@
                                     <div id="mdrej-list" class="revision-list">
                                     </div>
                                 </div>
-                                <div class="modal-footer border-0 pt-2">
-                                    <button type="button" class="btn btn-dark" id="btn-corregir-rechazo">
-                                        <i class="fas fa-upload mr-2"></i>Subir corrección
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>

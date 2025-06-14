@@ -1,0 +1,24 @@
+
+#agregarPoliticaBtn {
+  background-color: #007bff; /* Color de fondo azul */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 12px 20px; /* Espaciado adecuado */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor a pointer */
+  width: 100%; /* Ancho completo */
+  transition: background-color 0.3s, transform 0.3s; /* Transiciones para efectos */
+}
+
+/* Cambiar color de fondo y agregar sombra al pasar el ratón */
+#agregarPoliticaBtn:hover {
+  background-color: #0056b3; /* Color más oscuro cuando el ratón pasa */
+  transform: scale(1.05); /* Ligera expansión del botón */
+}
+
+/* Efecto al presionar el botón */
+#agregarPoliticaBtn:active {
+  background-color: #004085; /* Color aún más oscuro al hacer clic */
+  transform: scale(1); /* Restablecer tamaño al presionar */
+}

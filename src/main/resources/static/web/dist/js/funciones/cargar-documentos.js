@@ -19,6 +19,36 @@ $(document).ready(function () {
         });
     }
 
+    $("#formAgregarPolitica").submit(function(event) {
+        event.preventDefault();
+        var formData = new FormData();
+        var fileInput = $("#nuevoArchivo")[0].files[0];
+
+        if (fileInput) {
+            formData.append("file", fileInput);
+
+            $.ajax({
+                url: "/politicas/agregar-nueva-politica",
+                method: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    toastr.success("Política agregada con éxito!");
+
+                    cargarPoliticas();
+                },
+                error: function(error) {
+                    toastr.error("Error al agregar la política:", error);
+                    alert("Error al agregar la política: " + error.responseText);
+                }
+            });
+        } else {
+            alert("Por favor, seleccione un archivo PDF.");
+        }
+
+    });
+
     $("#uploadBtn").click(function() {
         $("#fileInput").click();
     });

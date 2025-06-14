@@ -53,11 +53,21 @@
                                     <p class="text-muted small">
                                         Seleccione el documento de referencia para la comparación
                                     </p>
+
                                     <select id="referenceDoc" class="form-control">
                                     </select>
+
+                                    <form id="formAgregarPolitica" enctype="multipart/form-data" class="mt-4">
+                                        <div class="form-group">
+                                            <label for="nuevoArchivo">Agregar nuevo documento PDF</label>
+                                            <input type="file" id="nuevoArchivo" name="nuevoArchivo" class="form-control" accept="application/pdf">
+                                        </div>
+                                        <button id="agregarPoliticaBtn" type="submit" class="btn btn-primary mt-2">Agregar Política</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+
 
                     </div><!-- /.row -->
 
@@ -88,6 +98,7 @@
     </div>
 </div>
 
+
 <footer class="mt-auto bg-light text-center py-3">
     <%@ include file="includes/footer.jspf" %>
 </footer>
@@ -110,6 +121,7 @@
 <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 <script src="/static/web/dist/js/funciones/cargar-documentos.js"></script>
+<script src="/static/web/dist/css/cargar-documentos.css"></script>
 
 <%@ include file="includes/all-jquery.jspf" %>
 </body>

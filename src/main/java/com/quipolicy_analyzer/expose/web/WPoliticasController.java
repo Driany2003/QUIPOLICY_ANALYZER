@@ -24,6 +24,11 @@ public class WPoliticasController {
   @Autowired
   private IPoliticaService politicaService;
 
+  @PostMapping("/agregar-nueva-politica")
+  public Mono<String> agregarNuevaPolitica(@RequestParam("file") MultipartFile nuevoArchivo) {
+    return politicaService.agregarNuevaPolitica(nuevoArchivo);
+  }
+
   @GetMapping("/listar-politicas")
   public Mono<ResponseEntity<PolizaResponse>> obtenerPoliticas() {
     log.info("Llegando a listar políticas");
@@ -67,4 +72,5 @@ public class WPoliticasController {
         .map(PolizaActualizada -> ResponseEntity.ok(PolizaActualizada))
         .defaultIfEmpty(ResponseEntity.noContent().build());
   }
+
 }
