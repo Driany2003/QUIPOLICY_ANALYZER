@@ -34,6 +34,7 @@
                         </a>
                     </li>
                 </c:if>
+                <!--
                 <c:if test="${sessionScope.role == 'TRABAJADOR'  || sessionScope.role == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">
@@ -41,7 +42,7 @@
                         <span class="hide-menu">Reporte</span>
                     </li>
 
-                    <!-- Reportes -->
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/quipolicy/menu/reporte/log">
                             <i class="mdi mdi-account-circle"></i>
@@ -49,7 +50,7 @@
                         </a>
                     </li>
                 </c:if>
-
+                -->
                 <c:if test="${sessionScope.role == 'CLIENTE'  || sessionScope.role == 'ADMINISTRADOR'}">
 
                     <li class="nav-small-cap">

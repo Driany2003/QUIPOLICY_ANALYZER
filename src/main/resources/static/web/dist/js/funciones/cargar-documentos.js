@@ -35,7 +35,9 @@ $(document).ready(function () {
                 processData: false,
                 success: function(response) {
                     toastr.success("Política agregada con éxito!");
-
+                    $("#nuevoArchivo").val("");
+                    $("#fileName").text("No se ha seleccionado ningún archivo");
+                    $("#fileSize").text("");
                     cargarPoliticas();
                 },
                 error: function(error) {

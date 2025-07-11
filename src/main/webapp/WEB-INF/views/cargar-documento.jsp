@@ -59,10 +59,10 @@
 
                                     <form id="formAgregarPolitica" enctype="multipart/form-data" class="mt-4">
                                         <div class="form-group">
-                                            <label for="nuevoArchivo">Agregar nuevo documento PDF</label>
+                                            <label for="nuevoArchivo" class="custom-label">Agregar nuevo documento PDF</label>
                                             <input type="file" id="nuevoArchivo" name="nuevoArchivo" class="form-control" accept="application/pdf">
                                         </div>
-                                        <button id="agregarPoliticaBtn" type="submit" class="btn btn-primary mt-2">Agregar Política</button>
+                                        <button id="agregarPoliticaBtn" type="submit" class="custom-btn">Agregar Política</button>
                                     </form>
                                 </div>
                             </div>
@@ -97,7 +97,57 @@
         </div>
     </div>
 </div>
+<style>
+    /* Personalización de la etiqueta del campo de entrada */
+    .custom-label {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px;
+        display: block;
+    }
 
+    /* Estilo para el input tipo archivo */
+    .custom-input {
+        font-size: 1em;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        width: 100%;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+    }
+
+    .custom-input:focus {
+        border-color: #007bff;
+        background-color: #fff;
+        outline: none;
+    }
+
+    /* Estilo para el botón gris y pequeño */
+    .custom-btn {
+        background-color: #6c757d;  /* Gris */
+        color: #fff;
+        border: none;
+        padding: 8px 16px;  /* Botón más pequeño */
+        font-size: 0.9em;  /* Texto más pequeño */
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: auto;  /* Se ajusta al contenido */
+        margin-top: 10px;
+    }
+
+    .custom-btn:hover {
+        background-color: #5a6268;  /* Gris más oscuro */
+    }
+
+    .custom-btn:active {
+        background-color: #343a40;  /* Gris aún más oscuro */
+    }
+
+
+</style>
 
 <footer class="mt-auto bg-light text-center py-3">
     <%@ include file="includes/footer.jspf" %>
